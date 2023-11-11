@@ -12,7 +12,7 @@ interface ChatProps {
 export function Chat({ messages }: ChatProps) {
   return (
     <div>
-      <ul className="space-y-10 md:space-y-10 mb-40">
+      <ul className="space-y-14 md:space-y-14 mb-40">
         {messages.map((message, i) => (
           <div key={i} className={cn("block", { "bg-gray-100": message.me })}>
             <div className={cn({ "block bg-gray-100 -m-2 p-2 md:-m-3 md:p-3 rounded-md": message.me })}>
