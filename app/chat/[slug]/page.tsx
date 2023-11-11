@@ -3,6 +3,7 @@ import { LinkSource } from "@/components/LinkSource";
 import { Rating } from "@/components/Rating";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
+import { redirect } from "next/navigation";
 
 export default function ChatPage({ params }: { params: { slug: string } }) {
   const samples = {
@@ -108,7 +109,10 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
     ],
   };
 
-  const messages = samples[params.slug];
+  if (!(params.slug in samples)) {
+    return redirect("/");
+  }
+  const messages = samples[params.slug as keyof typeof samples];
 
   return (
     <>
