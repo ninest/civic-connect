@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { cn } from "@/utils/style";
 import { ReactNode } from "react";
 
 interface ChatProps {
@@ -12,15 +12,16 @@ interface ChatProps {
 export function Chat({ messages }: ChatProps) {
   return (
     <div>
-      <ul className="space-y-4 mb-40">
+      <ul className="space-y-10 md:space-y-10 mb-40">
         {messages.map((message, i) => (
-          <li key={i}>
-            <b>{message.from}</b>
-            <div className="mt-1">{message.content}</div>
-          </li>
+          <div key={i} className={cn("block", { "bg-gray-100": message.me })}>
+            <div className={cn({ "block bg-gray-100 -m-2 p-2 md:-m-3 md:p-3 rounded-md": message.me })}>
+              <b>{message.from}</b>
+              <div className="mt-1 space-y-2">{message.content}</div>
+            </div>
+          </div>
         ))}
       </ul>
-      
     </div>
   );
 }
