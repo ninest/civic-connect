@@ -72,12 +72,11 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
               Please call our office at 202-225-8020 if you have specific questions about scheduling a meeting in
               Washington during this period.
             </p>
-            <p>
-              <LinkSource
-                title="Federal Shutdown FAQ"
-                url="https://moulton.house.gov/news/updates/federal-shutdown-faq"
-              />
-            </p>
+
+            <LinkSource
+              title="Federal Shutdown FAQ"
+              url="https://moulton.house.gov/news/updates/federal-shutdown-faq"
+            />
           </>
         ),
       },
@@ -90,9 +89,8 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
               Please complete the linked form to request Congressman Moulton appearance at a a meeting, speaking
               function, or a non-speaking function.
             </p>
-            <p>
-              <LinkSource title="Request a Meeting" url="https://moulton.house.gov/contact/request-a-meeting" />
-            </p>
+
+            <LinkSource title="Request a Meeting" url="https://moulton.house.gov/contact/request-a-meeting" />
           </>
         ),
       },
@@ -103,9 +101,7 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
           <>
             <p>I hope I was helpful! Feel free to ask other questions.</p>
             <p>If you do not have any more questions, please rate your interaction with me!</p>
-            <p>
-              <Rating />
-            </p>
+            <Rating />
           </>
         ),
       },
