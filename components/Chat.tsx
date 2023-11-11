@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { ReactNode } from "react";
 
 interface ChatProps {
@@ -10,13 +11,16 @@ interface ChatProps {
 
 export function Chat({ messages }: ChatProps) {
   return (
-    <ul className="space-y-4">
-      {messages.map((message, i) => (
-        <li key={i}>
-          <b>{message.from}</b>
-          <div className="mt-1">{message.content}</div>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="space-y-4 mb-40">
+        {messages.map((message, i) => (
+          <li key={i}>
+            <b>{message.from}</b>
+            <div className="mt-1">{message.content}</div>
+          </li>
+        ))}
+      </ul>
+      
+    </div>
   );
 }
