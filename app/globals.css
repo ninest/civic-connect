@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Space */
+@layer base {
+  
+}
+
+/* Variables and Shadcn-ui setup */
 @layer base {
   :root {
     --background: 0 0% 100%;
