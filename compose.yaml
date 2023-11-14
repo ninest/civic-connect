@@ -4,7 +4,7 @@ volumes:
 services:
   civicconnect_db:
     container_name: civicconnect_db
-    image: postgres
+    image: ankane/pgvector:v0.5.1
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
