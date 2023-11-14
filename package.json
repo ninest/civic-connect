@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma": "prisma",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio",
+    "db:push": "prisma db push",
+    "db:up": "docker-compose up -d && sleep 2 && docker exec civicconnect_db psql -U user -d postgres -c \"create database civicconnect_db;\"",
+    "db:down": "docker-compose down -v ",
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
@@ -14,6 +21,7 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.292.0",
     "next": "14.0.2",
+    "prisma": "^5.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.0.0",

@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-int
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  title: "CongressBot",
+  title: "CivicConnect",
   description: "Chatbot for Congress",
 };
 
