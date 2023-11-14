@@ -1,0 +1,32 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+model Bot {
+  id String @id @default(uuid())
+
+  name        String
+  description String
+
+  documents Document[]
+}
+
+model Document {
+  id String @id @default(uuid())
+
+  botId String
+  bot   Bot    @relation(fields: [botId], references: [id])
+
+  name        String
+  description String
+
+  content   String
+  embedding Unsupported("vector")?
+}

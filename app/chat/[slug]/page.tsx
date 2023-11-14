@@ -9,56 +9,56 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
   const samples = {
     opinion: [
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
-          "Hi I am CongressBot. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
+          "Hi I am CivicConnect. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
       },
       { from: "Me", me: true, content: "What is Rep Moulton's position on the Inflation Reduction Act?" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
           "As an AI representative I am not qualified to speak on behalf of the Representatives beliefs. However, I am more than happy to take down your opinion and pass it on the a staffer. Can you verify your address/zip first?",
       },
       { from: "Me", me: true, content: "123 Boston Ave, Boston MA, 02120 " },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
           "Thank you!  Your opinion has been noted. The Congressman appreciates you taking the time to leave your feedback.",
       },
     ],
     stuck: [
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
-          "Hi I am CongressBot. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
+          "Hi I am CivicConnect. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
       },
       { from: "Me", me: true, content: "I am stuck in the Maldives, and I lost my passport. What to I do?" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
           "Hello! First, we have to verify that you are a resident in Boston. Can you please specify your address?",
       },
       { from: "Me", me: true, content: "123 Washington Rd. Boston, MA 02126" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
           "Okay great! We confirmed your address. Have you filled out the casework request/privacy release form?",
       },
       { from: "Me", me: true, content: "Yes" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content: "Thank you! The urgent nature of your request has been noted and a staffer has been flagged",
       },
     ],
     shutdown: [
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content:
-          "Hi I am CongressBot. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
+          "Hi I am CivicConnect. I am here to answer any questions you may have, but, keep in mind, I am still an AI representative and do not have all of the answers.",
       },
       { from: "Me", me: true, content: "Is the DC office still open for meetings?" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content: (
           <>
             <p>
@@ -83,7 +83,7 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
       },
       { from: "Me", me: true, content: "Thank you! How can I setup a meeting?" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content: (
           <>
             <p>
@@ -97,7 +97,7 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
       },
       { from: "Me", me: true, content: "Thanks" },
       {
-        from: "CongressBot",
+        from: "CivicConnect",
         content: (
           <>
             <p>I hope I was helpful! Feel free to ask other questions.</p>
@@ -120,7 +120,7 @@ export default function ChatPage({ params }: { params: { slug: string } }) {
       <div className="fixed bottom-0 bg-white/90 left-0 right-0">
         <div className="space-x py-4">
           <div className="relative">
-            <Input className="z-0 text-lg px-5 py-6 pr-12" placeholder="Message CongressBot ..." />
+            <Input className="z-0 text-lg px-5 py-6 pr-12" placeholder="Message CivicConnect ..." />
 
             <button className="absolute top-[0.55rem] right-[0.55rem] border rounded-sm p-2">
               <ChevronRight className="h-4 w-4" />
