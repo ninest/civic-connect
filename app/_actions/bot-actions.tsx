@@ -1,6 +1,7 @@
 "use server";
 
-import { EditBotFormType, NewBotFormType, botService } from "@/services/bot";
+import { botService } from "@/services/bot";
+import { EditBotFormType, NewBotFormType } from "@/services/schemas";
 import { redirect } from "next/navigation";
 
 export const newBotAction = async (data: NewBotFormType) => {

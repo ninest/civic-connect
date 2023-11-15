@@ -1,15 +1,16 @@
 import { cn } from "@/utils/style";
 import { ReactNode } from "react";
 
-interface ChatProps {
+export interface ChatProps {
   messages: {
     from: string;
     me?: boolean;
-    content: ReactNode;
+    content: ReactNode | string;
   }[];
+  loading: boolean;
 }
 
-export function Chat({ messages }: ChatProps) {
+export function Chat({ messages, loading }: ChatProps) {
   return (
     <div>
       <ul className="space-y-14 md:space-y-14 mb-40">
@@ -21,6 +22,7 @@ export function Chat({ messages }: ChatProps) {
             </div>
           </div>
         ))}
+        {loading && <div>Loading ...</div>}
       </ul>
     </div>
   );
