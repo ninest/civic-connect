@@ -10,7 +10,8 @@ datasource db {
 }
 
 model Bot {
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
+  slug String @unique
 
   name        String
   description String

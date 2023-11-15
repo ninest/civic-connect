@@ -1,6 +1,6 @@
-import { Chat } from "@/components/Chat";
-import { LinkSource } from "@/components/LinkSource";
-import { Rating } from "@/components/Rating";
+import { Chat } from "@/components/chat";
+import { LinkSource } from "@/components/link-source";
+import { Rating } from "@/components/rating";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
 import { redirect } from "next/navigation";

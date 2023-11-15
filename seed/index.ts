@@ -1,12 +1,10 @@
-import { prisma, pgvector } from "@/db/prisma";
-import { getQueryEmbedding } from "@/langchain/embeddings";
+import { prisma } from "@/db/prisma";
 import { createDocuments, vectorStore } from "@/langchain/vectorspaces";
 import fs from "fs/promises";
-import { VectorStore } from "langchain/vectorstores/base";
 
 (async () => {
   const moulton = await prisma.bot.create({
-    data: { name: "Seth Moulton", description: "The chatbot for Congressman Seth Moulton." },
+    data: { slug: "seth-moulton", name: "Seth Moulton", description: "The chatbot for Congressman Seth Moulton." },
   });
 
   const about = await fs.readFile("./seed/data/about.txt", "utf-8");
