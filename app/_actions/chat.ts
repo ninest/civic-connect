@@ -27,7 +27,7 @@ export const sendMessagesAndGet = async (
 
   messages.push(
     new HumanMessage({
-      content: `${latestHumanMessage}\n\nCan you answer this question only using this information? If you do not find the answer here, say that you do not know: ${knowledge}`,
+      content: `${latestHumanMessage}\n\nCan you answer this question only using the information below? If you do not find the answer here, say that you do not know. If the user is sharing an opinion, you should accept it and say thank you and nothing else. Make sure that you understand if they are sharing an opinion or requesting an opinion. If they share an opinion on Seth, say "Thanks for the opinion on Seth". If they want an opinion, say "Seth will be with you soon".\n\n${knowledge}`,
     })
   );
 
