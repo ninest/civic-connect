@@ -1,21 +1,9 @@
 import { prisma } from "@/db/prisma";
 import { NotFoundException } from "@/errors";
+import { documentService } from "@/services/document";
+import { NewBotFormType, EditBotFormType } from "@/services/schemas";
 import { prismaTransformer } from "@/transformers/prisma";
 import { slugify } from "@/utils/string";
-import { z } from "zod";
-
-export const newBotFormSchema = z.object({
-  name: z.string().min(5),
-  description: z.string().min(5),
-});
-export type NewBotFormType = z.infer<typeof newBotFormSchema>;
-
-export const editBotFormSchema = z.object({
-  name: z.string().min(5),
-  description: z.string().min(5),
-  documents: z.array(z.object({ name: z.string(), content: z.string() })),
-});
-export type EditBotFormType = z.infer<typeof editBotFormSchema>;
 
 export const botService = {
   async createBot(params: NewBotFormType) {
@@ -39,6 +27,12 @@ export const botService = {
     return prismaTransformer.bot(bot);
   },
   async editBot(id: string, params: EditBotFormType) {
-    console.log(id, params);
+    await documentService.deleteAllDocuments(id);
+    const bot = await prisma.bot.update({
+      where: { id },
+      data: { name: params.name, description: params.description },
+    });
+
+    await documentService.createDocuments(id, params.documents);
   },
 };

@@ -6,7 +6,7 @@ import { Title } from "@/components/typography/title";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { EditBotFormType, editBotFormSchema } from "@/services/bot";
+import { EditBotFormType, editBotFormSchema } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 
@@ -21,6 +21,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
     defaultValues: {
       name: defaultValues.name,
       description: defaultValues.description,
+      documents: defaultValues.documents,
     },
   });
 
@@ -105,7 +106,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
                 </>
               )}
               <div>
-                <Button onClick={() => remove(index)} variant={"secondary"}>
+                <Button type="button" onClick={() => remove(index)} variant={"secondary"}>
                   Remove
                 </Button>
               </div>
@@ -113,7 +114,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
           ))}
 
           <div>
-            <Button onClick={() => append({ name: "", content: "" })} variant={"secondary"}>
+            <Button type="button" onClick={() => append({ name: "", content: "" })} variant={"secondary"}>
               Add document
             </Button>
           </div>
@@ -124,7 +125,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
         </form>
       </Form>
 
-      <Debug className="mt-5" data={form.watch()} />
+      {/* <Debug className="mt-5" data={form.watch()} /> */}
     </>
   );
 }

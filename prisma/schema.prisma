@@ -25,8 +25,7 @@ model Document {
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
 
-  name        String
-  description String
+  name String
 
   content   String
   embedding Unsupported("vector")?
