@@ -10,7 +10,8 @@ datasource db {
 }
 
 model Bot {
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
+  slug String @unique
 
   name        String
   description String
@@ -24,8 +25,7 @@ model Document {
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
 
-  name        String
-  description String
+  name String
 
   content   String
   embedding Unsupported("vector")?
