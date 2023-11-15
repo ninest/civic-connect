@@ -1,6 +1,6 @@
 "use client";
 
-import { newBotAction } from "@/app/new-bot/new-bot-actions";
+import { newBotAction } from "@/app/_actions/bot-actions";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,19 @@ export const NewBotForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Bot name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
