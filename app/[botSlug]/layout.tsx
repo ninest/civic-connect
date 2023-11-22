@@ -1,7 +1,9 @@
 import { SidebarLink } from "@/app/[botSlug]/sidebar-link";
 import { Spacer } from "@/components/spacer";
+import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";
-import { Edit } from "lucide-react";
+import { Edit, Share2 } from "lucide-react";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 export default async function BotPageLayout({
@@ -18,22 +20,34 @@ export default async function BotPageLayout({
     { iconSlug: "File", title: "Documents", href: `/${bot.slug}/documents` },
     { iconSlug: "FormInput", title: "Forms", href: `/${bot.slug}/forms` },
     { iconSlug: "BarChart2", title: "Analytics", href: `/${bot.slug}/analytics` },
+    { iconSlug: "MessagesSquare", title: "Conversations", href: `/${bot.slug}/conversations` },
   ];
 
   return (
     <>
       <main className="flex h-screen">
-        <aside className="w-[20rem] border-r">
-          <div className="h-[4rem] border-b flex items-center px-5">
-            <h1 className="font-black text-lg">{bot.name}</h1>
+        <aside className="w-[20rem] border-r flex flex-col justify-between">
+          <div>
+            <div className="h-[4rem] border-b flex items-center px-5">
+              <h1 className="font-black text-lg">{bot.name}</h1>
+            </div>
+
+            <section className="p-5 pl-8 space-y-3">
+              {links.map((link, i) => (
+                <div key={i}>
+                  <SidebarLink {...link} />
+                </div>
+              ))}
+            </section>
           </div>
 
-          <section className="p-5 pl-8 space-y-3">
-            {links.map((link, i) => (
-              <div key={i}>
-                <SidebarLink {...link} />
-              </div>
-            ))}
+          <section className="p-5 flex items-center space-x-3">
+            <Button asChild variant={"secondary"} className="w-full">
+              <Link href={"/chat"}>Demo chatbot</Link>
+            </Button>
+            <Button variant={"outline"} size={"icon"} className="px-2">
+              <Share2 className="w-4 h-4" />
+            </Button>
           </section>
         </aside>
         <div className="flex-1 w-full">{children}</div>

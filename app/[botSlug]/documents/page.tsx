@@ -8,7 +8,7 @@ export default async function BotPage({ params }: { params: { botSlug: string } 
   const documents = await documentService.getAllDocuments(bot.id);
 
   return (
-    <BotSubPageLayout title="Documents">
+    <BotSubPageLayout crumbs={[{ title: "Documents" }]}>
       <BotDocumentsForm botId={bot.id} defaultValues={{ ...bot, documents }} />
     </BotSubPageLayout>
   );

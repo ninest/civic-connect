@@ -1,30 +1,27 @@
 "use client";
 
-import { editBotAction } from "@/app/_actions/bot-actions";
+import { createFormAction, editFormAction } from "@/app/_actions/form-actions";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { EditBotFormType, editBotFormSchema } from "@/services/schemas";
+import { FormFormSchema, FormFormType } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 interface Props {
   botId: string;
-  defaultValues: Partial<EditBotFormType>;
+  formId?: string;
+  defaultValues?: Partial<FormFormType>;
 }
 
-export function BotEditForm({ botId, defaultValues }: Props) {
-  const form = useForm<EditBotFormType>({
-    resolver: zodResolver(editBotFormSchema),
-    defaultValues: {
-      name: defaultValues.name,
-      description: defaultValues.description,
-    },
-  });
+export function FormForm({ botId, formId, defaultValues }: Props) {
+  const editing = !!formId;
+  const form = useForm<FormFormType>({ resolver: zodResolver(FormFormSchema), defaultValues });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    await editBotAction(botId, data);
+    if (editing) await editFormAction(botId, data);
+    else await createFormAction(botId, data);
   });
 
   return (
@@ -36,7 +33,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Bot name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -44,7 +41,6 @@ export function BotEditForm({ botId, defaultValues }: Props) {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="description"
@@ -58,9 +54,20 @@ export function BotEditForm({ botId, defaultValues }: Props) {
               </FormItem>
             )}
           />
-          <div>
-            <Button>Save</Button>
-          </div>
+          <FormField
+            control={form.control}
+            name="instructions"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Instructions</FormLabel>
+                <FormControl>
+                  <Textarea {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button>Save</Button>
         </form>
       </Form>
     </>

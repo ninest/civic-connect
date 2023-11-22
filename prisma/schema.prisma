@@ -38,6 +38,7 @@ model Form {
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
 
+  name         String
   description  String
   instructions String // prompt and details
 

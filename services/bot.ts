@@ -21,7 +21,6 @@ export const botService = {
     return bots.map(prismaTransformer.bot);
   },
   async getBotBySlug(slug: string) {
-    console.log(slug);
     const bot = await prisma.bot.findUnique({ where: { slug } });
     if (!bot) throw new NotFoundException("Bot", slug);
     return prismaTransformer.bot(bot);

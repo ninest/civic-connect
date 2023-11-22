@@ -14,7 +14,7 @@
     "db:up": "docker-compose up -d && sleep 2 && docker exec civicconnect_db psql -U user -d postgres -c \"create database civicconnect_db;\"",
     "db:down": "docker-compose down -v ",
     "db:seed": "tsx seed/index.ts",
-    "db:reset": "yarn db:down && yarn db:up && yarn db:push && yarn db:seed"
+    "db:reset": "pnpm db:down && pnpm db:up && pnpm db:push && pnpm prisma:generate && pnpm db:seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
