@@ -1,4 +1,4 @@
-import { BotEditForm } from "@/app/[botSlug]/edit-bot-form";
+import { BotDocumentsForm } from "@/app/[botSlug]/documents/documents-bot-form";
 import { Spacer } from "@/components/spacer";
 import { Title } from "@/components/typography/title";
 import { botService } from "@/services/bot";
@@ -9,12 +9,12 @@ export default async function BotPage({ params }: { params: { botSlug: string } 
   const documents = await documentService.getAllDocuments(bot.id);
 
   return (
-    <main className="space-x py-5">
-      <Title level={1}>{bot.name}</Title>
+    <>
+      <Title level={1}>Edit Documents</Title>
 
       <Spacer className="h-5" />
 
-      <BotEditForm botId={bot.id} defaultValues={{ ...bot, documents }} />
-    </main>
+      <BotDocumentsForm botId={bot.id} defaultValues={{ ...bot, documents }} />
+    </>
   );
 }
