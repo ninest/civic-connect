@@ -16,8 +16,9 @@ model Bot {
   name        String
   description String
 
-  documents Document[]
-  forms     Form[]
+  documents     Document[]
+  forms         Form[]
+  conversations Conversation[]
 }
 
 model Document {
@@ -55,4 +56,16 @@ model FormSubmission {
   // Store the fields in the submission in case the fields changed
   fields      Json
   fieldValues Json
+}
+
+model Conversation {
+  id String @id @default(uuid())
+
+  botId String
+  bot   Bot    @relation(fields: [botId], references: [id])
+
+  name     String
+  messages Json
+
+  rating Int
 }
