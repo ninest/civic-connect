@@ -60,6 +60,9 @@ export function BotEditForm({ botId, defaultValues }: Props) {
               </FormItem>
             )}
           />
+          <div>
+            <Button>Save</Button>
+          </div>
         </form>
       </Form>
     </>

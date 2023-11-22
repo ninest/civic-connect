@@ -14,7 +14,7 @@ export function Title({ level = 2, children, ...props }: TitleProps) {
       className={cn(
         "scroll-m-20 font-display text-gray-800 dark:text-gray-400",
         {
-          "text-4xl lg:text-5xl font-extrabold tracking-tight": level == 1,
+          "text-3xl lg:text-4xl font-extrabold tracking-tight": level == 1,
           "text-2xl font-semibold tracking-normal": level == 2,
           "text-xl font-semibold tracking-tight": level == 3,
         },

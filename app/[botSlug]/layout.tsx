@@ -16,22 +16,27 @@ export default async function BotPageLayout({
   const links = [
     { iconSlug: "Edit2", title: "Edit", href: `/${bot.slug}/edit` },
     { iconSlug: "File", title: "Documents", href: `/${bot.slug}/documents` },
+    { iconSlug: "FormInput", title: "Forms", href: `/${bot.slug}/forms` },
+    { iconSlug: "BarChart2", title: "Analytics", href: `/${bot.slug}/analytics` },
   ];
 
   return (
     <>
       <main className="flex h-screen">
-        <aside className="w-[20rem] bg-white p-5 border-r">
-          <h1 className="font-black text-lg">{bot.name}</h1>
-          <Spacer className="h-8" />
+        <aside className="w-[20rem] border-r">
+          <div className="h-[4rem] border-b flex items-center px-5">
+            <h1 className="font-black text-lg">{bot.name}</h1>
+          </div>
 
-          <section className="space-y-4">
+          <section className="p-5 pl-8 space-y-3">
             {links.map((link, i) => (
-              <SidebarLink key={i} {...link} />
+              <div key={i}>
+                <SidebarLink {...link} />
+              </div>
             ))}
           </section>
         </aside>
-        <div className="flex-1 w-full space-x py-5">{children}</div>
+        <div className="flex-1 w-full">{children}</div>
       </main>
     </>
   );

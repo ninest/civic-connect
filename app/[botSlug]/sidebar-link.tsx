@@ -13,9 +13,9 @@ export const SidebarLink = ({ iconSlug, title, href }: { iconSlug: IconSlug; tit
   return (
     <Link
       href={href}
-      className={cn("-m-2 py-2 px-3 rounded-md flex items-center space-x-3", {
-        "hover:bg-primary-foreground": !active,
-        "bg-primary text-primary-foreground": active,
+      className={cn("-m-2 py-2 px-3 rounded-sm flex items-center space-x-3 text-sm", {
+        "hover:bg-gray-100": !active,
+        "bg-gray-100 before:absolute before:-ml-[1.45rem] before:mb-0.5 before:rounded before:bg-primary before:w-1.5 before:h-7": active,
       })}
     >
       <div className="">

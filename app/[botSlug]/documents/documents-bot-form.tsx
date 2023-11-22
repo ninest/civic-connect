@@ -33,53 +33,55 @@ export function BotDocumentsForm({ botId, defaultValues }: Props) {
     <>
       <Form {...form}>
         <form onSubmit={onSubmit} className="space-y-4">
-          {fields.map((field, index) => (
-            <section key={field.id} className="rounded-md p-5 border flex items-center justify-between">
-              {!!field.content ? (
-                <>
-                  <div className="font-mono text-sm">{field.name}</div>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <FormField
-                      control={form.control}
-                      key={field.id}
-                      name={`documents.${index}.content`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <input
-                            type="file"
-                            onChange={(e) => {
-                              const file = e?.target?.files[0];
-                              if (file && file.type === "text/plain") {
-                                const reader = new FileReader();
-                                reader.readAsText(file);
-                                reader.onload = (e) => {
-                                  field.onChange(e.target?.result);
-                                  update(index, { name: file.name, content: e.target?.result });
-                                };
-                              }
-                            }}
-                          />
+          <div className="grid gap-4 grid-cols-2">
+            {fields.map((field, index) => (
+              <section key={field.id} className="rounded-md p-2 pl-4 border flex items-center justify-between">
+                {!!field.content ? (
+                  <>
+                    <div className="font-mono text-sm">{field.name}</div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <FormField
+                        control={form.control}
+                        key={field.id}
+                        name={`documents.${index}.content`}
+                        render={({ field }) => (
+                          <FormItem className="text-xs">
+                            <input
+                              type="file"
+                              onChange={(e) => {
+                                const file = e?.target?.files[0];
+                                if (file && file.type === "text/plain") {
+                                  const reader = new FileReader();
+                                  reader.readAsText(file);
+                                  reader.onload = (e) => {
+                                    field.onChange(e.target?.result);
+                                    update(index, { name: file.name, content: e.target?.result });
+                                  };
+                                }
+                              }}
+                            />
 
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </>
-              )}
-              <div>
-                <Button type="button" onClick={() => remove(index)} variant={"secondary"}>
-                  Remove
-                </Button>
-              </div>
-            </section>
-          ))}
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </>
+                )}
+                <div>
+                  <Button type="button" onClick={() => remove(index)} variant={"secondary"} size={"sm"}>
+                    Remove
+                  </Button>
+                </div>
+              </section>
+            ))}
+          </div>
 
           <div>
-            <Button type="button" onClick={() => append({ name: "", content: "" })} variant={"secondary"}>
+            <Button type="button" onClick={() => append({ name: "", content: "" })} variant={"secondary"} size={"sm"}>
               Add document
             </Button>
           </div>
