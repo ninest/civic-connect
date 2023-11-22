@@ -1,4 +1,5 @@
 import { SidebarLink } from "@/app/[botSlug]/sidebar-link";
+import { DemoSheet } from "@/app/demo-sheet";
 import { Spacer } from "@/components/spacer";
 import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";
@@ -43,9 +44,7 @@ export default async function BotPageLayout({
           </div>
 
           <section className="p-5 flex items-center space-x-3">
-            <Button asChild variant={"secondary"} className="w-full">
-              <Link href={"/chat"}>Demo chatbot</Link>
-            </Button>
+            <DemoSheet />
             <Button variant={"outline"} size={"icon"} className="px-2">
               <Share2 className="w-4 h-4" />
             </Button>
