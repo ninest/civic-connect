@@ -1,7 +1,7 @@
 "use server";
 
 import { botService } from "@/services/bot";
-import { EditBotFormType, NewBotFormType } from "@/services/schemas";
+import { EditBotDocumentsFormType, EditBotFormType, NewBotFormType } from "@/services/schemas";
 import { redirect } from "next/navigation";
 
 export const newBotAction = async (data: NewBotFormType) => {
@@ -11,4 +11,8 @@ export const newBotAction = async (data: NewBotFormType) => {
 
 export const editBotAction = async (botId: string, data: EditBotFormType) => {
   await botService.editBot(botId, data);
+};
+
+export const editBotDocumentsAction = async (botId: string, data: EditBotDocumentsFormType) => {
+  await botService.editDocuments(botId, data);
 };

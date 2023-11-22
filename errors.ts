@@ -15,14 +15,20 @@ export class HttpException extends Error {
   }
 }
 
-type ExceptionObjectNames = "Bot" | "Document" | "Message";
+type ObjectNames = "Bot" | "Document" | "Message" | "Form" | "FormFields";
 export class NotFoundException extends HttpException {
   /**
    * Constructs a not found error
    * @param name the name of the thing that can't be found
    * @param id the id of the thing that can't be found
    */
-  constructor(name: ExceptionObjectNames, id: number | string) {
+  constructor(name: ObjectNames, id: number | string) {
     super(404, `${name} with id/slug ${id} not found`);
+  }
+}
+
+export class InvalidDataException extends HttpException {
+  constructor(name: ObjectNames, id: string | number, data: any) {
+    super(400, `${name} with id/slug ${id} received invalid data: ${data}`);
   }
 }

@@ -10,3 +10,18 @@ export type Document = {
   name: string;
   content: string;
 };
+
+export type Form = {
+  id: string;
+  name: string;
+  description: string;
+  instructions: string;
+};
+export type FormField = {
+  fieldName: string;
+  valueType: "string" | "number";
+  description: string;
+};
+export type FormWithFields = Form & {
+  fields: FormField[];
+};
