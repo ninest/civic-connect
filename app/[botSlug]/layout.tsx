@@ -20,13 +20,14 @@ export default async function BotPageLayout({
     { iconSlug: "File", title: "Documents", href: `/${bot.slug}/documents` },
     { iconSlug: "FormInput", title: "Forms", href: `/${bot.slug}/forms` },
     { iconSlug: "BarChart2", title: "Analytics", href: `/${bot.slug}/analytics` },
+    { iconSlug: "Blocks", title: "Integrations", href: `/${bot.slug}/integrations` },
     { iconSlug: "MessagesSquare", title: "Conversations", href: `/${bot.slug}/conversations` },
   ];
 
   return (
     <>
       <main className="flex h-screen">
-        <aside className="w-[20rem] border-r flex flex-col justify-between">
+        <aside className="fixed h-screen overflow-y-auto w-[20rem] border-r flex flex-col justify-between">
           <div>
             <div className="h-[4rem] border-b flex items-center px-5">
               <h1 className="font-black text-lg">{bot.name}</h1>
@@ -50,7 +51,7 @@ export default async function BotPageLayout({
             </Button>
           </section>
         </aside>
-        <div className="flex-1 w-full">{children}</div>
+        <div className="ml-[20rem] flex-1 w-full">{children}</div>
       </main>
     </>
   );

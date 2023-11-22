@@ -28,8 +28,9 @@ export const FormFormSchema = z.object({
 export type FormFormType = z.infer<typeof FormFormSchema>;
 
 export const formFieldSchema = z.object({
-  fieldName: z.string().min(5),
+  fieldName: z.string().min(2),
   valueType: z.union([z.literal("string"), z.literal("number")]),
+  description: z.string().min(5),
 });
 export type FormFieldType = z.infer<typeof formFieldSchema>;
 

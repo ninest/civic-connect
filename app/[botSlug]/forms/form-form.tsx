@@ -9,19 +9,31 @@ import { FormFormSchema, FormFormType } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-interface Props {
+type BotProps = {
   botId: string;
-  formId?: string;
-  defaultValues?: Partial<FormFormType>;
-}
+  formId?: never;
+};
+
+type FormProps = {
+  botId?: never;
+  formId: string;
+};
+
+type Props = (BotProps | FormProps) & { defaultValues?: Partial<FormFormType> };
 
 export function FormForm({ botId, formId, defaultValues }: Props) {
-  const editing = !!formId;
+  const editing = !!formId && !botId;
   const form = useForm<FormFormType>({ resolver: zodResolver(FormFormSchema), defaultValues });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    if (editing) await editFormAction(botId, data);
-    else await createFormAction(botId, data);
+    if (editing) await editFormAction(formId, data);
+    else {
+      if (!botId) {
+        console.error("botId not available!");
+        return;
+      }
+      await createFormAction(botId, data);
+    }
   });
 
   return (

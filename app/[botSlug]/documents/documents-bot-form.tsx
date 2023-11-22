@@ -1,6 +1,7 @@
 "use client";
 
 import { editBotDocumentsAction } from "@/app/_actions/bot-actions";
+import { NoElementsEmpty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { EditBotDocumentsFormType, EditBotFormType, editBotDocumentsFormSchema } from "@/services/schemas";
@@ -33,6 +34,11 @@ export function BotDocumentsForm({ botId, defaultValues }: Props) {
     <>
       <Form {...form}>
         <form onSubmit={onSubmit} className="space-y-4">
+          {fields.length === 0 && (
+            <>
+              <NoElementsEmpty children="No documents yet ..." />
+            </>
+          )}
           <div className="grid gap-4 grid-cols-2">
             {fields.map((field, index) => (
               <section key={field.id} className="rounded-md p-2 pl-4 border flex items-center justify-between">

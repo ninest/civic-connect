@@ -9,3 +9,8 @@ export function slugify(str: string) {
     .replace(/\s+/g, "-") // replace spaces with hyphens
     .replace(/-+/g, "-"); // remove consecutive hyphens
 }
+
+export function pluralize(count: number, singular: string, plural: string) {
+  if (count === 1) return singular;
+  else return plural;
+}

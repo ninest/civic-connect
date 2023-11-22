@@ -1,5 +1,5 @@
 import { cn } from "@/utils/style";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 
 interface EmptyProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -10,3 +10,7 @@ export const Empty = ({ children, className }: EmptyProps) => {
     </div>
   );
 };
+
+export const NoElementsEmpty = ({ children }: { children: ReactNode }) => (
+  <Empty className="p-5 text-center">{children}</Empty>
+);
