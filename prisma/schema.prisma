@@ -17,6 +17,7 @@ model Bot {
   description String
 
   documents Document[]
+  forms     Form[]
 }
 
 model Document {
@@ -29,4 +30,28 @@ model Document {
 
   content   String
   embedding Unsupported("vector")?
+}
+
+model Form {
+  id String @id @default(uuid())
+
+  botId String
+  bot   Bot    @relation(fields: [botId], references: [id])
+
+  description  String
+  instructions String // prompt and details
+
+  fields      Json
+  submissions FormSubmission[]
+}
+
+model FormSubmission {
+  id String @id @default(uuid())
+
+  formId String
+  form   Form   @relation(fields: [formId], references: [id])
+
+  // Store the fields in the submission in case the fields changed
+  fields      Json
+  fieldValues Json
 }
