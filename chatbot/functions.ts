@@ -1,4 +1,4 @@
-import { Bot, Form, FormWithFields } from "@/types";
+import { Bot, FormWithFields } from "@/types";
 
 export function createFunctions(bot: Bot, forms: FormWithFields[]) {
   const functions = forms.map((form) => {
