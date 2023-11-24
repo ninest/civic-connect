@@ -1,12 +1,8 @@
+import { Message } from "@/types";
 import { cn } from "@/utils/style";
-import { ReactNode } from "react";
 
 export interface ChatProps {
-  messages: {
-    from: string;
-    me?: boolean;
-    content: ReactNode | string;
-  }[];
+  messages: Message[];
   loading: boolean;
 }
 
