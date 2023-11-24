@@ -1,10 +1,8 @@
 import { SidebarLink } from "@/app/[botSlug]/sidebar-link";
 import { DemoSheet } from "@/app/demo-sheet";
-import { Spacer } from "@/components/spacer";
 import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";
-import { Edit, Share2 } from "lucide-react";
-import Link from "next/link";
+import { Share2 } from "lucide-react";
 import { ReactNode } from "react";
 
 export default async function BotPageLayout({
@@ -44,7 +42,7 @@ export default async function BotPageLayout({
           </div>
 
           <section className="p-5 flex items-center space-x-3">
-            <DemoSheet />
+            <DemoSheet bot={bot} />
             <Button variant={"outline"} size={"icon"} className="px-2">
               <Share2 className="w-4 h-4" />
             </Button>

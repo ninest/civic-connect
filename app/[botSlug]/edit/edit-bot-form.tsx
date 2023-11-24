@@ -2,7 +2,7 @@
 
 import { editBotAction } from "@/app/_actions/bot-actions";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { EditBotFormType, editBotFormSchema } from "@/services/schemas";
@@ -54,6 +54,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
                 <FormControl>
                   <Textarea {...field} />
                 </FormControl>
+                <FormDescription>This should contain information on who the bot is and what it can answer questions on.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

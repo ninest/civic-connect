@@ -25,3 +25,7 @@ export type FormField = {
 export type FormWithFields = Form & {
   fields: FormField[];
 };
+
+export type Message = ({ me: false; from: string } | { me: true }) & {
+  content: string;
+};
