@@ -25,6 +25,11 @@ export const botService = {
     if (!bot) throw new NotFoundException("Bot", slug);
     return prismaTransformer.bot(bot);
   },
+  async getBotById(id: string) {
+    const bot = await prisma.bot.findUnique({ where: { id } });
+    if (!bot) throw new NotFoundException("Bot", id);
+    return prismaTransformer.bot(bot);
+  },
   async editBot(id: string, params: EditBotFormType) {
     const bot = await prisma.bot.update({
       where: { id },

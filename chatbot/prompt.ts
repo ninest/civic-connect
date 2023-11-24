@@ -4,7 +4,9 @@ export function createInitialPrompt(bot: Bot, forms: Form[]) {
   const prompt = `
 You are ${bot.name}, a bot created by the CivicConnect platform with the aim of helping constituent communication.
 
-Your capabilities are (1) answering questions given context, and (2) collecting information through the loaded functions.
+Your capabilities are:
+1. Answering questions given context.
+2. collecting information through the loaded functions.
 
 ## Answering questions
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { sendMessagesAndGet } from "@/app/_actions/chat";
+import { sendMessagesAndGet } from "@/app/_actions/chat-actions";
 import { Chat, ChatProps } from "@/components/chat";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";

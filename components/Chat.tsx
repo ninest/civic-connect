@@ -17,8 +17,8 @@ export function Chat({ messages, loading }: ChatProps) {
         {messages.map((message, i) => (
           <div key={i} className={cn("block", { "bg-gray-100": message.me })}>
             <div className={cn({ "block bg-gray-100 p-2 md:p-3 rounded-md": message.me })}>
-              <b>{message.from}</b>
-              <div className="mt-1 space-y-2">{message.content}</div>
+              <b>{message.me ? "Me" : message.from}</b>
+              <div className="mt-1 space-y-2 whitespace-pre">{message.content}</div>
             </div>
           </div>
         ))}
