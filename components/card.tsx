@@ -9,7 +9,7 @@ interface Props extends ComponentProps<"div"> {
 }
 export function LinkCard({ href, className, children }: Props) {
   return (
-    <Link href={href} className={cn(className, "block border rounded-sm p-5")}>
+    <Link href={href} className={cn("block border rounded-sm p-5", className)}>
       {children}
     </Link>
   );

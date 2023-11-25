@@ -26,7 +26,7 @@ export function DemoSheet({ bot }: Props) {
 
     form.setValue("message", "");
 
-    const newMessages = await getMessagesAction(bot.id, previousMessages);
+    const newMessages = await getMessagesAction(bot.id, previousMessages, true);
     setMessages(newMessages);
   });
 

@@ -2,7 +2,6 @@ import { Document, prisma } from "@/db/prisma";
 import { Prisma } from "@prisma/client";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PrismaVectorStore } from "langchain/vectorstores/prisma";
-import "server-only";
 
 export const vectorStore = PrismaVectorStore.withModel<Document>(prisma).create(
   new OpenAIEmbeddings({ openAIApiKey: process.env.OPENAI_API_KEY }),

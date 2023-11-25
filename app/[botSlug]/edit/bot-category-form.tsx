@@ -17,7 +17,7 @@ interface EditProps {
   type: "edit";
   categoryId: string;
   deleteRedirectHref: string;
-  defaultValues?: Partial<EditCategoryFormType>;
+  defaultValues: Partial<EditCategoryFormType>;
 }
 
 type Props = CreateProps | EditProps;
