@@ -10,3 +10,7 @@ export const addCategoryAction = async (botId: string, data: EditCategoryFormTyp
 export const editCategoryAction = async (categoryId: string, data: EditCategoryFormType) => {
   await categoryService.edit(categoryId, data);
 };
+
+export const deleteCategoryAction = async (categoryId: string) => {
+  await categoryService.delete(categoryId);
+};

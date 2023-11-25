@@ -1,6 +1,6 @@
 "use client";
 
-import { addCategoryAction, editCategoryAction } from "@/app/_actions/category-actions";
+import { addCategoryAction, deleteCategoryAction, editCategoryAction } from "@/app/_actions/category-actions";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,11 @@ export function BotCategoryForm({ botId, categoryId, defaultValues }: Props) {
       await addCategoryAction(botId, data);
     }
   });
+
+  const onDelete = async () => {
+    invariant(categoryId);
+    await deleteCategoryAction(categoryId);
+  };
 
   return (
     <>
@@ -64,7 +69,12 @@ export function BotCategoryForm({ botId, categoryId, defaultValues }: Props) {
             )}
           />
 
-          <Button>Save</Button>
+          <div className="flex items-center justify-between">
+            <Button>Save</Button>
+            <Button type="button" onClick={onDelete} variant={"secondary"} size={"sm"}>
+              Delete
+            </Button>
+          </div>
         </form>
       </Form>
     </>

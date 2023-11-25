@@ -18,4 +18,9 @@ export const categoryService = {
       data: params,
     });
   },
+  async delete(categoryId: string) {
+    await prisma.category.delete({
+      where: { id: categoryId },
+    });
+  },
 };
