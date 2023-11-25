@@ -16,9 +16,20 @@ model Bot {
   name        String
   description String
 
+  categories    Category[]
   documents     Document[]
   forms         Form[]
   conversations Conversation[]
+}
+
+model Category {
+  id String @id @default(uuid())
+
+  name        String
+  description String
+
+  bot   Bot?    @relation(fields: [botId], references: [id])
+  botId String?
 }
 
 model Document {
