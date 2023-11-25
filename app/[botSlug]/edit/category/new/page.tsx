@@ -7,7 +7,7 @@ export default async function CategoryEditPage({ params }: { params: { botSlug: 
 
   return (
     <BotSubPageLayout crumbs={[{ title: "Edit" }, { title: "Category" }, { title: "New" }]}>
-      <BotCategoryForm botId={bot.id} />
+      <BotCategoryForm type="create" botId={bot.id} />
     </BotSubPageLayout>
   );
 }

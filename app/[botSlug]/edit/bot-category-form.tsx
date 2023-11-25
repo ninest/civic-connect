@@ -8,32 +8,45 @@ import { Textarea } from "@/components/ui/textarea";
 import { EditCategoryFormType, editCategoryFormSchema } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import invariant from "tiny-invariant";
 
-interface Props {
-  botId?: string;
-  categoryId?: string;
+interface CreateProps {
+  type: "create";
+  botId: string;
+}
+interface EditProps {
+  type: "edit";
+  categoryId: string;
+  deleteRedirectHref: string;
   defaultValues?: Partial<EditCategoryFormType>;
 }
 
-export function BotCategoryForm({ botId, categoryId, defaultValues }: Props) {
-  const editing = !!categoryId && !botId;
+type Props = CreateProps | EditProps;
+
+export function BotCategoryForm(props: Props) {
+  // const editing = !!categoryId && !botId;
+  const editing = props.type === "edit";
+
   const form = useForm<EditCategoryFormType>({
     resolver: zodResolver(editCategoryFormSchema),
-    defaultValues,
+    defaultValues: editing
+      ? props.defaultValues
+      : {
+          name: "",
+          description: "",
+        },
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    if (editing) await editCategoryAction(categoryId, data);
+    if (editing) await editCategoryAction(props.categoryId, data);
     else {
-      invariant(botId);
-      await addCategoryAction(botId, data);
+      await addCategoryAction(props.botId, data);
     }
   });
 
   const onDelete = async () => {
-    invariant(categoryId);
-    await deleteCategoryAction(categoryId);
+    if (editing) {
+      await deleteCategoryAction(props.categoryId);
+    }
   };
 
   return (
@@ -71,9 +84,11 @@ export function BotCategoryForm({ botId, categoryId, defaultValues }: Props) {
 
           <div className="flex items-center justify-between">
             <Button>Save</Button>
-            <Button type="button" onClick={onDelete} variant={"secondary"} size={"sm"}>
-              Delete
-            </Button>
+            {editing && (
+              <Button type="button" onClick={onDelete} variant={"secondary"} size={"sm"}>
+                Delete
+              </Button>
+            )}
           </div>
         </form>
       </Form>
