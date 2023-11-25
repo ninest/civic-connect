@@ -54,10 +54,10 @@ export function BotEditForm({ botId, defaultValues }: Props) {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea {...field}  rows={10}/>
                 </FormControl>
                 <FormDescription>
-                  This should contain information on who the bot is and what it can answer questions on.
+                  This should contain information on who the bot is and what it can answer questions on. Include information on what the documents are about.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

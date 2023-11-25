@@ -45,7 +45,7 @@ export function BotCategoryForm(props: Props) {
 
   const onDelete = async () => {
     if (editing) {
-      await deleteCategoryAction(props.categoryId);
+      await deleteCategoryAction(props.categoryId, props.deleteRedirectHref);
     }
   };
 

@@ -13,7 +13,7 @@ import { Message } from "@/types";
 import invariant from "tiny-invariant";
 
 export async function getMessagesAction(botId: string, previousMessages: Message[]): Promise<Message[]> {
-  const bot = await botService.getBotById(botId);
+  const bot = await botService.getById(botId);
   const latestHumanMessage = previousMessages[0].content;
 
   const docs = await vectorStore.similaritySearch(latestHumanMessage);

@@ -28,8 +28,8 @@ model Category {
   name        String
   description String
 
-  bot   Bot?    @relation(fields: [botId], references: [id])
-  botId String?
+  bot   Bot    @relation(fields: [botId], references: [id])
+  botId String
 }
 
 model Document {

@@ -12,7 +12,7 @@ export default async function BotPageLayout({
   params: { botSlug: string };
   children: ReactNode;
 }) {
-  const bot = await botService.getBotBySlug(params.botSlug);
+  const bot = await botService.getBySlug(params.botSlug);
 
   const links = [
     { iconSlug: "Edit2", title: "Edit", href: `/${bot.slug}/edit` },

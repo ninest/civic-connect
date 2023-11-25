@@ -14,23 +14,26 @@ export const formService = {
     return prismaTransformer.form(form);
   },
   async createForm(botId: string, params: FormFormType) {
-    await prisma.form.create({
+    const form = await prisma.form.create({
       data: {
         botId,
         ...params,
         fields: [],
       },
     });
+    return prismaTransformer.form(form);
   },
   async edit(formId: string, params: FormFormType) {
-    await prisma.form.update({ where: { id: formId }, data: params });
+    const form = await prisma.form.update({ where: { id: formId }, data: params });
+    return prismaTransformer.form(form);
   },
   async editFields(formId: string, params: EditFormFieldsType) {
-    await prisma.form.update({
+    const form = await prisma.form.update({
       where: { id: formId },
       data: {
         fields: params.fields,
       },
     });
+    return prismaTransformer.form(form);
   },
 };

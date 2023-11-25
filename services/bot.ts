@@ -6,7 +6,7 @@ import { prismaTransformer } from "@/transformers/prisma";
 import { slugify } from "@/utils/string";
 
 export const botService = {
-  async createBot(params: NewBotFormType) {
+  async create(params: NewBotFormType) {
     const newBot = await prisma.bot.create({
       data: {
         name: params.name,
@@ -16,25 +16,26 @@ export const botService = {
     });
     return prismaTransformer.bot(newBot);
   },
-  async getBots() {
+  async getAll() {
     const bots = await prisma.bot.findMany();
     return bots.map(prismaTransformer.bot);
   },
-  async getBotBySlug(slug: string) {
+  async getBySlug(slug: string) {
     const bot = await prisma.bot.findUnique({ where: { slug }, include: { categories: true } });
     if (!bot) throw new NotFoundException("Bot", slug);
     return prismaTransformer.botWithCategories(bot);
   },
-  async getBotById(id: string) {
+  async getById(id: string) {
     const bot = await prisma.bot.findUnique({ where: { id }, include: { categories: true } });
     if (!bot) throw new NotFoundException("Bot", id);
     return prismaTransformer.botWithCategories(bot);
   },
-  async editBot(id: string, params: EditBotFormType) {
+  async edit(id: string, params: EditBotFormType) {
     const bot = await prisma.bot.update({
       where: { id },
       data: { name: params.name, description: params.description },
     });
+    return prismaTransformer.bot(bot);
   },
   async editDocuments(id: string, params: EditBotDocumentsFormType) {
     await documentService.deleteAllDocuments(id);

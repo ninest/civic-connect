@@ -10,6 +10,8 @@ export type Category = {
   name: string;
   description: string;
 };
+export type CategoryWithBotId = Category & { botId: string };
+
 export type BotWithCategories = Bot & {
   categories: Category[];
 };
@@ -26,14 +28,16 @@ export type Form = {
   description: string;
   instructions: string;
 };
+export type FormWithBotId = Form & { botId: string };
+
 export type FormField = {
   fieldName: string;
   valueType: "string" | "number";
   description: string;
 };
-export type FormWithFields = Form & {
-  fields: FormField[];
-};
+
+export type FormWithFields = Form & { fields: FormField[] };
+export type FormWithBotIdWithFields = FormWithBotId & { fields: FormField[] };
 
 export type Message = ({ me: false; from: string } | { me: true }) & {
   content: string;

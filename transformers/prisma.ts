@@ -1,4 +1,15 @@
-import { Bot, BotWithCategories, Category, Document, Form, FormField, FormWithFields } from "@/types";
+import {
+  Bot,
+  BotWithCategories,
+  Category,
+  CategoryWithBotId,
+  Document,
+  Form,
+  FormField,
+  FormWithBotId,
+  FormWithBotIdWithFields,
+  FormWithFields,
+} from "@/types";
 import { Prisma } from "@prisma/client";
 
 export const prismaTransformer = {
@@ -8,20 +19,21 @@ export const prismaTransformer = {
   botWithCategories: (bot: Prisma.BotGetPayload<{ include: { categories: true } }>): BotWithCategories => {
     return bot;
   },
-  category: (cat: Prisma.CategoryGetPayload<{}>): Category => {
+  category: (cat: Prisma.CategoryGetPayload<{}>): CategoryWithBotId => {
     return cat;
   },
   document: (doc: Prisma.DocumentGetPayload<{}>): Document => {
     return doc;
   },
-  form: (form: Prisma.FormGetPayload<{}>): FormWithFields => {
+  form: (form: Prisma.FormGetPayload<{}>): FormWithBotIdWithFields => {
     const transformedFormFields = form.fields as FormField[];
 
-    const transformedForm: Form = {
+    const transformedForm: FormWithBotId = {
       id: form.id,
       name: form.name,
       description: form.description,
       instructions: form.instructions,
+      botId: form.botId,
     };
 
     return {

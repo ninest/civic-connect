@@ -13,14 +13,16 @@ export const categoryService = {
     await prisma.category.create({ data: { botId, ...params } });
   },
   async edit(categoryId: string, params: EditCategoryFormType) {
-    await prisma.category.update({
+    const category = await prisma.category.update({
       where: { id: categoryId },
       data: params,
     });
+    return prismaTransformer.category(category);
   },
   async delete(categoryId: string) {
-    await prisma.category.delete({
+    const category = await prisma.category.delete({
       where: { id: categoryId },
     });
+    return prismaTransformer.category(category)
   },
 };

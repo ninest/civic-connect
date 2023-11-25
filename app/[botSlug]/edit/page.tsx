@@ -10,7 +10,7 @@ import { urls } from "@/urls";
 import Link from "next/link";
 
 export default async function BotEditPage({ params }: { params: { botSlug: string } }) {
-  const bot = await botService.getBotBySlug(params.botSlug);
+  const bot = await botService.getBySlug(params.botSlug);
   const categories = bot.categories;
 
   return (

@@ -4,7 +4,7 @@ import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
 
 export default async function BotEditPage({ params }: { params: { botSlug: string } }) {
-  const bot = await botService.getBotBySlug(params.botSlug);
+  const bot = await botService.getBySlug(params.botSlug);
   const forms = await formService.getForms(bot.id);
 
   return (
