@@ -15,7 +15,7 @@ export class HttpException extends Error {
   }
 }
 
-type ObjectNames = "Bot" | "Document" | "Message" | "Form" | "FormFields";
+type ObjectNames = "Bot" | "Category" | "Document" | "Message" | "Form" | "FormFields";
 export class NotFoundException extends HttpException {
   /**
    * Constructs a not found error

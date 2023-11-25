@@ -5,7 +5,7 @@ import { prisma } from "@/db/prisma";
     data: {
       slug: "seth-moulton",
       name: "Seth Moulton Bot",
-      description: "The chatbot for Congressman Seth Moulton.",
+      description: "The chatbot for Congressman Seth Moulton, that can answer questions about Congressman Seth Moulton in Salem, MA, and collect opinions and other information from constituents.",
       categories: {
         create: [
           {

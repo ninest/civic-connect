@@ -21,14 +21,14 @@ export const botService = {
     return bots.map(prismaTransformer.bot);
   },
   async getBotBySlug(slug: string) {
-    const bot = await prisma.bot.findUnique({ where: { slug } });
+    const bot = await prisma.bot.findUnique({ where: { slug }, include: { categories: true } });
     if (!bot) throw new NotFoundException("Bot", slug);
-    return prismaTransformer.bot(bot);
+    return prismaTransformer.botWithCategories(bot);
   },
   async getBotById(id: string) {
-    const bot = await prisma.bot.findUnique({ where: { id } });
+    const bot = await prisma.bot.findUnique({ where: { id }, include: { categories: true } });
     if (!bot) throw new NotFoundException("Bot", id);
-    return prismaTransformer.bot(bot);
+    return prismaTransformer.botWithCategories(bot);
   },
   async editBot(id: string, params: EditBotFormType) {
     const bot = await prisma.bot.update({

@@ -1,4 +1,5 @@
 import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
+import { LinkCard } from "@/components/card";
 import { Empty, NoElementsEmpty } from "@/components/empty";
 import { Spacer } from "@/components/spacer";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,7 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
       ) : (
         <div className="space-y-5">
           {forms.map((form, i) => (
-            <Link key={i} href={`/${bot.slug}/forms/${form.id}`} className="border rounded-sm p-5 flex justify-between">
+            <LinkCard key={i} href={`/${bot.slug}/forms/${form.id}`} className="flex justify-between">
               <div>
                 <b>{form.name}</b>
                 <Spacer className="h-1" />
@@ -42,7 +43,7 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
               <div className="text-muted-foreground">
                 {form.fields.length} {pluralize(form.fields.length, "field", "fields")}
               </div>
-            </Link>
+            </LinkCard>
           ))}
         </div>
       )}

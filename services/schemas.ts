@@ -9,6 +9,12 @@ export const newBotFormSchema = z.object({
 });
 export type NewBotFormType = z.infer<typeof newBotFormSchema>;
 
+export const editCategoryFormSchema = z.object({
+  name: z.string().min(3),
+  description: z.string().min(5),
+});
+export type EditCategoryFormType = z.infer<typeof editCategoryFormSchema>;
+
 export const editBotFormSchema = z.object({
   name: z.string().min(5),
   description: z.string().min(5),

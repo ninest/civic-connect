@@ -1,32 +1,34 @@
 "use client";
 
-import { editBotAction } from "@/app/_actions/bot-actions";
-import { NoElementsEmpty } from "@/components/empty";
-import { Title } from "@/components/typography/title";
+import { addCategoryAction, editCategoryAction } from "@/app/_actions/category-actions";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { EditBotFormType, editBotFormSchema } from "@/services/schemas";
+import { EditCategoryFormType, editCategoryFormSchema } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import invariant from "tiny-invariant";
 
 interface Props {
-  botId: string;
-  defaultValues: Partial<EditBotFormType>;
+  botId?: string;
+  categoryId?: string;
+  defaultValues?: Partial<EditCategoryFormType>;
 }
 
-export function BotEditForm({ botId, defaultValues }: Props) {
-  const form = useForm<EditBotFormType>({
-    resolver: zodResolver(editBotFormSchema),
-    defaultValues: {
-      name: defaultValues.name,
-      description: defaultValues.description,
-    },
+export function BotCategoryForm({ botId, categoryId, defaultValues }: Props) {
+  const editing = !!categoryId && !botId;
+  const form = useForm<EditCategoryFormType>({
+    resolver: zodResolver(editCategoryFormSchema),
+    defaultValues,
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    await editBotAction(botId, data);
+    if (editing) await editCategoryAction(categoryId, data);
+    else {
+      invariant(botId);
+      await addCategoryAction(botId, data);
+    }
   });
 
   return (
@@ -38,7 +40,7 @@ export function BotEditForm({ botId, defaultValues }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Bot name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -56,17 +58,13 @@ export function BotEditForm({ botId, defaultValues }: Props) {
                 <FormControl>
                   <Textarea {...field} />
                 </FormControl>
-                <FormDescription>
-                  This should contain information on who the bot is and what it can answer questions on.
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div>
-            <Button>Save</Button>
-          </div>
+          <Button>Save</Button>
         </form>
       </Form>
     </>

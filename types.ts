@@ -5,6 +5,15 @@ export type Bot = {
   description: string;
 };
 
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+};
+export type BotWithCategories = Bot & {
+  categories: Category[];
+};
+
 export type Document = {
   id: string;
   name: string;
