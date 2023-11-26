@@ -1,13 +1,23 @@
 import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
 import { BotDocumentsForm } from "@/app/[botSlug]/documents/documents-bot-form";
 import { Spacer } from "@/components/spacer";
-import { FormDescription } from "@/components/ui/form";
 import { botService } from "@/services/bot";
 import { documentService } from "@/services/document";
 import { urls } from "@/urls";
 import Link from "next/link";
 
-export default async function BotPage({ params }: { params: { botSlug: string } }) {
+
+interface Params {
+  botSlug: string;
+}
+
+export async function generateMetadata({ params }: { params: Params }) {
+  return {
+    title: "Documents",
+  };
+}
+
+export default async function BotPage({ params }: { params: Params }) {
   const bot = await botService.getBySlug(params.botSlug);
   const documents = await documentService.getAllDocuments(bot.id);
 

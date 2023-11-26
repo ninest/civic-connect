@@ -11,7 +11,13 @@ import { pluralize } from "@/utils/string";
 import { ArrowRight, Plus } from "lucide-react";
 import Link from "next/link";
 
-export default async function BotEditPage({ params }: { params: { botSlug: string } }) {
+interface Params {
+  botSlug: string;
+}
+
+
+
+export default async function BotEditPage({ params }: { params: Params }) {
   const bot = await botService.getBySlug(params.botSlug);
   const forms = await formService.getMany(bot.id);
 
@@ -46,7 +52,7 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
                   {form.fields.length} {pluralize(form.fields.length, "field", "fields")}
                 </div>
               </div>
-              <Spacer className="h-3"/>
+              <Spacer className="h-3" />
               <div className="flex items-center space-x-3">
                 <Button variant={"secondary"} size={"sm"}>
                   <Link href={urls.bot.editForm(bot.slug, form.id)}>Edit</Link>

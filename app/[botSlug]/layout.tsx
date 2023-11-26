@@ -6,13 +6,18 @@ import { botService } from "@/services/bot";
 import { PanelRight, Share2 } from "lucide-react";
 import { ReactNode } from "react";
 
-export default async function BotPageLayout({
-  params,
-  children,
-}: {
-  params: { botSlug: string };
-  children: ReactNode;
-}) {
+interface Params {
+  botSlug: string;
+}
+
+export async function generateMetadata({ params }: { params: Params }) {
+  const bot = await botService.getBySlug(params.botSlug);
+  return {
+    title: { template: `%s - ${bot.name}`, default: bot.name },
+  };
+}
+
+export default async function BotPageLayout({ params, children }: { params: Params; children: ReactNode }) {
   const bot = await botService.getBySlug(params.botSlug);
 
   const links = [

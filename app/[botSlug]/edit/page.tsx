@@ -9,7 +9,17 @@ import { botService } from "@/services/bot";
 import { urls } from "@/urls";
 import Link from "next/link";
 
-export default async function BotEditPage({ params }: { params: { botSlug: string } }) {
+interface Params {
+  botSlug: string;
+}
+
+export async function generateMetadata({ params }: { params: Params }) {
+  return {
+    title: "Edit",
+  };
+}
+
+export default async function BotEditPage({ params }: { params: Params }) {
   const bot = await botService.getBySlug(params.botSlug);
   const categories = bot.categories;
 
