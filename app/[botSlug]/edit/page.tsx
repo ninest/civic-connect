@@ -1,6 +1,6 @@
 import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
 import { BotEditForm } from "@/app/[botSlug]/edit/edit-bot-form";
-import { LinkCard } from "@/components/card";
+import { Card } from "@/components/card";
 import { NoElementsEmpty } from "@/components/empty";
 import { Spacer } from "@/components/spacer";
 import { Title } from "@/components/typography/title";
@@ -30,11 +30,11 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
       )}
       <div className="space-y-5">
         {categories.map((category) => (
-          <LinkCard key={category.id} href={urls.bot.editCategory(bot.slug, category.id)}>
+          <Card key={category.id} href={urls.bot.editCategory(bot.slug, category.id)}>
             <b>{category.name}</b>
             <Spacer className="h-1" />
             <div className="text-muted-foreground">{category.description}</div>
-          </LinkCard>
+          </Card>
         ))}
       </div>
       <Spacer className="h-5" />

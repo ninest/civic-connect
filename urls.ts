@@ -11,6 +11,7 @@ export const urls = {
     forms: (botSlug: string) => `/${botSlug}/forms`,
     createForm: (botSlug: string) => `/${botSlug}/forms/create`,
     editForm: (botSlug: string, formId: string) => `/${botSlug}/forms/${formId}`,
+    formSubmissions: (botSlug: string, formId: string) => `/${botSlug}/forms/${formId}/submissions`,
 
     integrations: (botSlug: string) => `/${botSlug}/integrations`,
     

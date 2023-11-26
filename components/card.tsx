@@ -4,13 +4,17 @@ import Link from "next/link";
 import { ComponentProps, ReactNode } from "react";
 
 interface Props extends ComponentProps<"div"> {
-  href: Url;
+  href?: Url;
   children: ReactNode;
 }
-export function LinkCard({ href, className, children }: Props) {
-  return (
-    <Link href={href} className={cn("block border rounded-sm p-5", className)}>
-      {children}
-    </Link>
-  );
+export function Card({ href, className, children }: Props) {
+  const classes = cn("block border rounded-sm p-5", className);
+
+  if (href)
+    return (
+      <Link href={href} className={classes}>
+        {children}
+      </Link>
+    );
+  else return <div className={classes}>{children}</div>;
 }

@@ -5,6 +5,7 @@ import {
   CategoryWithBotId,
   Document,
   Form,
+  FormSubmission,
   FormField,
   FormWithBotId,
   FormWithBotIdWithFields,
@@ -39,6 +40,14 @@ export const prismaTransformer = {
     return {
       ...transformedForm,
       fields: transformedFormFields,
+    };
+  },
+  formSubmission: (fs: Prisma.FormSubmissionGetPayload<{}>): FormSubmission => {
+    return {
+      id: fs.id,
+      formId: fs.formId,
+      fields: fs.fields,
+      fieldValues: fs.fieldValues,
     };
   },
 };

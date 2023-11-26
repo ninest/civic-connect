@@ -16,6 +16,8 @@ import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
 import { formSubmissionService } from "@/services/form-submissions";
 import { Message } from "@/types";
+import { urls } from "@/urls";
+import { revalidatePath } from "next/cache";
 import invariant from "tiny-invariant";
 
 export async function getMessagesAction(
@@ -24,7 +26,7 @@ export async function getMessagesAction(
   debug: boolean = false
 ): Promise<Message[]> {
   const bot = await botService.getById(botId);
-  const forms = await formService.getForms(botId);
+  const forms = await formService.getMany(botId);
 
   console.log(previousMessages);
 
@@ -43,7 +45,7 @@ export async function getMessagesAction(
   );
   const lcMessagesWithContext = [...lcMessages];
 
-  console.log(lcMessagesWithContext)
+  console.log(lcMessagesWithContext);
 
   const lastMessage = lcMessages.at(-1);
   invariant(lastMessage != undefined, "Last message exists");
@@ -65,6 +67,8 @@ export async function getMessagesAction(
     const values = JSON.parse(nextMessage.additional_kwargs.function_call.arguments);
 
     await formSubmissionService.submit(bot.id, formName, values);
+    const form = await formService.getByName(formName);
+    revalidatePath(urls.bot.formSubmissions(bot.slug, form.id));
   }
 
   const prevUiMessages = langchainToUiMessages(debug ? lcMessagesWithContext : lcMessages, bot.name);

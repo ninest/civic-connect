@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const createFormAction = async (botId: string, data: FormFormType) => {
-  const form = await formService.createForm(botId, data);
+  const form = await formService.create(botId, data);
   const bot = await botService.getById(form.botId);
   return redirect(urls.bot.editForm(bot.slug, form.id));
 };

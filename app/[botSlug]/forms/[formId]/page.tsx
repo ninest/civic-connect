@@ -4,9 +4,12 @@ import { FormForm } from "@/app/[botSlug]/forms/form-form";
 import { Spacer } from "@/components/spacer";
 import { Title } from "@/components/typography/title";
 import { formService } from "@/services/form";
+import { formSubmissionService } from "@/services/form-submissions";
+import { formSubmissionSchema } from "@/services/schemas";
 
 export default async function FormEditFieldsPage({ params }: { params: { formId: string } }) {
-  const form = await formService.getForm(params.formId);
+  const form = await formService.getById(params.formId);
+
 
   return (
     <BotSubPageLayout crumbs={[{ title: "Forms" }, { title: `${form.name}` }]}>

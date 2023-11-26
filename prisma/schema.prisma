@@ -10,8 +10,10 @@ datasource db {
 }
 
 model Bot {
-  id   String @id @default(uuid())
-  slug String @unique
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name        String
   description String
@@ -23,7 +25,9 @@ model Bot {
 }
 
 model Category {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name        String
   description String
@@ -33,7 +37,9 @@ model Category {
 }
 
 model Document {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
@@ -45,7 +51,9 @@ model Document {
 }
 
 model Form {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
@@ -59,7 +67,8 @@ model Form {
 }
 
 model FormSubmission {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
 
   formId String
   form   Form   @relation(fields: [formId], references: [id])

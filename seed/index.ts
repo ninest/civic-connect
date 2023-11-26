@@ -23,7 +23,7 @@ The documents contain:
     description: "Everything related to healthcare and health insurance",
   });
 
-  const opinionsForm = await formService.createForm(sethMoultonBot.id, {
+  const opinionsForm = await formService.create(sethMoultonBot.id, {
     name: "Opinions",
     description: "A form to collect opinions from users",
     instructions: "Collect a user's opinions",

@@ -1,3 +1,5 @@
+import { FormFieldType, FormSubmissionType } from "@/services/schemas";
+
 export type Bot = {
   id: string;
   slug: string;
@@ -45,4 +47,12 @@ type SystemMessage = { type: "system" };
 type FunctionMessage = { type: "function"; name: string; arguments: any };
 export type Message = (HumanMessage | AiMessage | SystemMessage | FunctionMessage) & {
   content: string;
+};
+
+export type FormSubmission = {
+  id: string;
+  formId: string;
+
+  fields: FormFieldType[];
+  fieldValues: FormSubmissionType;
 };
