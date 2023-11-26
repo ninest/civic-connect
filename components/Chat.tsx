@@ -47,11 +47,19 @@ export function Chat({ messages, loading, debug = false }: ChatProps) {
                 </div>
               );
             } else if (message.type === "function") {
+              const keyValues = Object.entries(message.kwargs);
               return (
                 <div key={i}>
-                  <b>Function</b>
+                  <b>Form submission</b>
                   <ContentClamper initiallyClamped={true} className={messageContentClasses}>
-                    {message.content}
+                    <div>
+                      {keyValues.map((kv) => (
+                        <div key={kv[0]}>
+                          <span className="text-sm font-mono text-muted-foreground">{kv[0]}</span>: {kv[1] as string}
+                        </div>
+                      ))}
+                    </div>
+                    <div>{message.content}</div>
                   </ContentClamper>
                 </div>
               );

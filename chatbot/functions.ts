@@ -15,6 +15,7 @@ export function createFunctions(bot: Bot, forms: FormWithFields[]) {
       parameters: {
         type: "object",
         properties,
+        required: form.fields.map((field) => field.fieldName),
       },
     };
   });

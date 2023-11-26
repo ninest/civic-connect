@@ -38,7 +38,7 @@ The documents contain:
       {
         fieldName: "Zip code",
         valueType: "string",
-        description: "The user's zip code",
+        description: "The user's USA zip code",
       },
       {
         fieldName: "Opinion",
