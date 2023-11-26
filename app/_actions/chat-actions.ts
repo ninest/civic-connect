@@ -14,6 +14,7 @@ import {
 import { vectorStore } from "@/langchain/vectorspaces";
 import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
+import { formSubmissionService } from "@/services/form-submissions";
 import { Message } from "@/types";
 import invariant from "tiny-invariant";
 
@@ -25,7 +26,7 @@ export async function getMessagesAction(
   const bot = await botService.getById(botId);
   const forms = await formService.getForms(botId);
 
-  console.log(previousMessages)
+  console.log(previousMessages);
 
   const model = chatModel.bind({ functions: createFunctions(bot, forms) });
 
@@ -42,6 +43,8 @@ export async function getMessagesAction(
   );
   const lcMessagesWithContext = [...lcMessages];
 
+  console.log(lcMessagesWithContext)
+
   const lastMessage = lcMessages.at(-1);
   invariant(lastMessage != undefined, "Last message exists");
   const lastMessageWithContext = lcMessagesWithContext.at(-1);
@@ -55,6 +58,14 @@ export async function getMessagesAction(
 
   const nextMessage = await model.invoke(lcMessagesWithContext);
   console.log(nextMessage);
+
+  if (nextMessage.additional_kwargs.function_call) {
+    // Submit a form!
+    const formName = nextMessage.additional_kwargs.function_call.name.split("_form")[0];
+    const values = JSON.parse(nextMessage.additional_kwargs.function_call.arguments);
+
+    await formSubmissionService.submit(bot.id, formName, values);
+  }
 
   const prevUiMessages = langchainToUiMessages(debug ? lcMessagesWithContext : lcMessages, bot.name);
   const latestUiMessage = langchainToUiMessage(nextMessage, bot.name);

@@ -44,3 +44,6 @@ export const editFormFieldsSchema = z.object({
   fields: z.array(formFieldSchema),
 });
 export type EditFormFieldsType = z.infer<typeof editFormFieldsSchema>;
+
+export const formSubmissionSchema = z.record(z.string());
+export type FormSubmissionType = z.infer<typeof formSubmissionSchema>;

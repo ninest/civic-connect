@@ -10,7 +10,7 @@ export function createFunctions(bot: Bot, forms: FormWithFields[]) {
       };
     });
     return {
-      name: `${form.name.toLowerCase()}_form`,
+      name: `${form.name}_form`,
       description: `${form.description}\n\n${form.instructions}`,
       parameters: {
         type: "object",

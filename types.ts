@@ -42,7 +42,7 @@ export type FormWithBotIdWithFields = FormWithBotId & { fields: FormField[] };
 type HumanMessage = { type: "human" };
 type AiMessage = { type: "ai"; from: string };
 type SystemMessage = { type: "system" };
-type FunctionMessage = { type: "function"; name: string; kwargs: any };
+type FunctionMessage = { type: "function"; name: string; arguments: any };
 export type Message = (HumanMessage | AiMessage | SystemMessage | FunctionMessage) & {
   content: string;
 };

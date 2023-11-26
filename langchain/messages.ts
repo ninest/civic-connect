@@ -1,13 +1,5 @@
 import { Message } from "@/types";
-import {
-  AIMessage,
-  BaseMessage,
-  BaseMessageChunk,
-  FunctionMessage,
-  HumanMessage,
-  MessageContent,
-  SystemMessage,
-} from "langchain/schema";
+import { AIMessage, BaseMessage, HumanMessage, MessageContent, SystemMessage } from "langchain/schema";
 import invariant from "tiny-invariant";
 
 export function uiToLangchainMessages(systemPrompt: string, uiMessages: Message[]) {
@@ -29,7 +21,11 @@ export function uiToLangchainMessage(uiMessage: Message) {
       return new SystemMessage({ content: uiMessage.content });
     }
     case "function": {
-      return new AIMessage({ name: uiMessage.name, additional_kwargs: uiMessage.kwargs, content: uiMessage.content });
+      return new AIMessage({
+        name: uiMessage.name,
+        additional_kwargs: { function_call: { name: uiMessage.name, arguments: JSON.stringify(uiMessage.arguments) } },
+        content: uiMessage.content,
+      });
     }
     default:
       return null;
@@ -64,7 +60,7 @@ export function langchainToUiMessage(lcMessage: HumanMessage | AIMessage, aiName
           const m: Message = {
             type: "function",
             name: lcMessage.additional_kwargs.function_call.name.split("_form")[0],
-            kwargs: JSON.parse(lcMessage.additional_kwargs.function_call.arguments),
+            arguments: JSON.parse(lcMessage.additional_kwargs.function_call.arguments),
             content: "The form has been submitted the above information",
           };
           return m;
@@ -88,7 +84,7 @@ export function langchainToUiMessage(lcMessage: HumanMessage | AIMessage, aiName
         const m: Message = {
           type: "function",
           name: lcMessage.name ?? "Function name",
-          kwargs: lcMessage.additional_kwargs,
+          arguments: lcMessage.additional_kwargs,
           content,
         };
         return m;

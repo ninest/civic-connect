@@ -47,7 +47,7 @@ export function Chat({ messages, loading, debug = false }: ChatProps) {
                 </div>
               );
             } else if (message.type === "function") {
-              const keyValues = Object.entries(message.kwargs);
+              const keyValues = Object.entries(message.arguments);
               return (
                 <div key={i}>
                   <b>Form submission</b>

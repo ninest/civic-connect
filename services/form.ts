@@ -1,5 +1,5 @@
 import { prisma } from "@/db/prisma";
-import { NotFoundException } from "@/errors";
+import { InvalidDataException, NotAllowedException, NotFoundException } from "@/errors";
 import { EditFormFieldsType, FormFormType } from "@/services/schemas";
 import { prismaTransformer } from "@/transformers/prisma";
 
@@ -14,6 +14,10 @@ export const formService = {
     return prismaTransformer.form(form);
   },
   async createForm(botId: string, params: FormFormType) {
+    // Form name must be unique
+    const existingFormByName = await prisma.form.findFirst({ where: { botId, name: params.name } });
+    if (existingFormByName) throw new NotAllowedException(`For by name ${params.name} already exists`);
+
     const form = await prisma.form.create({
       data: {
         botId,

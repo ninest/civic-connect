@@ -15,7 +15,7 @@ export class HttpException extends Error {
   }
 }
 
-type ObjectNames = "Bot" | "Category" | "Document" | "Message" | "Form" | "FormFields";
+type ObjectNames = "Bot" | "Category" | "Document" | "Message" | "Form" | "FormFields" | "FormSubmission";
 export class NotFoundException extends HttpException {
   /**
    * Constructs a not found error
@@ -30,5 +30,11 @@ export class NotFoundException extends HttpException {
 export class InvalidDataException extends HttpException {
   constructor(name: ObjectNames, id: string | number, data: any) {
     super(400, `${name} with id/slug ${id} received invalid data: ${data}`);
+  }
+}
+
+export class NotAllowedException extends HttpException {
+  constructor(message: string) {
+    super(400, message);
   }
 }
