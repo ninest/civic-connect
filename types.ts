@@ -39,6 +39,10 @@ export type FormField = {
 export type FormWithFields = Form & { fields: FormField[] };
 export type FormWithBotIdWithFields = FormWithBotId & { fields: FormField[] };
 
-export type Message = ({ me: false; from: string } | { me: true }) & {
+type HumanMessage = { type: "human" };
+type AiMessage = { type: "ai"; from: string };
+type SystemMessage = { type: "system" };
+type FunctionMessage = { type: "function"; name: string; kwargs: any };
+export type Message = (HumanMessage | AiMessage | SystemMessage | FunctionMessage) & {
   content: string;
 };

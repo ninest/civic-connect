@@ -1,6 +1,5 @@
 "use server";
 
-import { createFunctions } from "@/chatbot/functions";
 import { createInitialPrompt } from "@/chatbot/prompt";
 import { chatModel } from "@/langchain/chat";
 import {
@@ -23,10 +22,7 @@ export async function getMessagesAction(
   const bot = await botService.getById(botId);
   const forms = await formService.getForms(botId);
 
-  const model = chatModel.bind({
-    functions: createFunctions(bot, forms),
-  });
-
+  const model = chatModel;
 
   const latestHumanMessage = previousMessages[0].content;
 
@@ -35,9 +31,9 @@ export async function getMessagesAction(
   for (const doc of docs) knowledge += `${doc.pageContent}\n`;
 
   const lcMessages = uiToLangchainMessages(
-    // `You are ${bot.name}, For every prompt, you will be given some context. Answer the question only using that information. If you cannot find the answer in that information, say that you do not know.`,
     createInitialPrompt(bot, forms),
-    previousMessages
+    // Filter to ensure the system prompt is not duplicated
+    previousMessages.filter((m) => m.type !== "system")
   );
   const lcMessagesWithContext = [...lcMessages];
 
@@ -52,13 +48,13 @@ export async function getMessagesAction(
     `\nHere is some context that may be relevant for this question: ${knowledge}`
   );
 
-  const nextMessage = await model.predictMessages(lcMessagesWithContext);
+  const nextMessage = await model.invoke(lcMessagesWithContext);
 
   return [
     // ...previousMessages,
     ...langchainToUiMessages(debug ? lcMessagesWithContext : lcMessages, bot.name),
     {
-      me: false,
+      type: "ai",
       from: bot.name,
       content: getLangchainMessageContent(nextMessage.content),
     },

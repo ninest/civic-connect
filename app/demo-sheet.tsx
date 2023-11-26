@@ -17,11 +17,12 @@ interface Props {
 }
 
 export function DemoSheet({ bot }: Props) {
+  const [debugMode, setDebugMode] = useState(true);
   const form = useForm({ defaultValues: { message: "" } });
   const [messages, setMessages] = useState<Message[]>([]);
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const previousMessages = [...messages, { from: "Me", me: true, content: data.message }];
+    const previousMessages: Message[] = [...messages, { type: "human", content: data.message }];
     setMessages(previousMessages);
 
     form.setValue("message", "");
@@ -29,6 +30,10 @@ export function DemoSheet({ bot }: Props) {
     const newMessages = await getMessagesAction(bot.id, previousMessages, true);
     setMessages(newMessages);
   });
+
+  const reset = () => {
+    setMessages([]);
+  };
 
   return (
     <>
@@ -40,13 +45,18 @@ export function DemoSheet({ bot }: Props) {
         </SheetTrigger>
         <SheetContent>
           <div className="relative h-full">
-            <Button variant={"secondary"} size={"sm"}>
-              Reset
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button onClick={reset} variant={"secondary"} size={"sm"}>
+                Reset
+              </Button>
+              <Button onClick={() => setDebugMode(!debugMode)} variant={"secondary"} size={"sm"}>
+                Debug mode: {debugMode ? "on" : "off"}
+              </Button>
+            </div>
             <Spacer className="h-5" />
 
             <div className="h-full overflow-y-scroll pb-40">
-              <Chat loading={form.formState.isSubmitting} messages={messages} />
+              <Chat loading={form.formState.isSubmitting} messages={messages} debug={debugMode} />
             </div>
 
             <div className="absolute bottom-0 left-0 right-0">

@@ -1,47 +1,76 @@
 import { Message } from "@/types";
-import { AIMessage, HumanMessage, MessageContent, SystemMessage } from "langchain/schema";
+import { AIMessage, BaseMessage, FunctionMessage, HumanMessage, MessageContent, SystemMessage } from "langchain/schema";
 import invariant from "tiny-invariant";
 
 export function uiToLangchainMessages(systemPrompt: string, uiMessages: Message[]) {
   const messages = uiMessages.map((uiMessage) => {
-    if (uiMessage.me) return new HumanMessage({ content: uiMessage.content });
-    else return new AIMessage({ content: uiMessage.content });
+    switch (uiMessage.type) {
+      case "ai": {
+        return new AIMessage({ content: uiMessage.content });
+      }
+      case "human": {
+        return new HumanMessage({ content: uiMessage.content });
+      }
+      case "system": {
+        return new SystemMessage({ content: uiMessage.content });
+      }
+      case "function": {
+        return new FunctionMessage({ name: "", additional_kwargs: {}, content: uiMessage.content });
+      }
+
+      default:
+        return null;
+    }
   });
-  return [new SystemMessage({ content: systemPrompt }), ...messages];
+  return [new SystemMessage({ content: systemPrompt }), ...messages.filter((m): m is BaseMessage => m != null)];
 }
 
 export function langchainToUiMessages(langchainMessages: HumanMessage[], aiName: string): Message[] {
-  const messages = langchainMessages
-    .map((lcMessage) => {
-      if (lcMessage._getType() === "human") {
-        let content: string = "";
-        if (typeof lcMessage.content === "string") {
-          content = lcMessage.content;
-        } else {
-          lcMessage.content.map((c) => {
-            if (c.type === "text") return c.text;
-            else return `![image](${c.image_url})`;
-          });
+  const messagesOrNull = langchainMessages.map((lcMessage) => {
+    const type = lcMessage._getType();
+    if (["human", "ai", "system", "function"].includes(type)) {
+      const content = getLangchainMessageContent(lcMessage.content);
+      switch (type) {
+        case "human": {
+          const m: Message = {
+            type: "human",
+            content,
+          };
+          return m;
         }
-        const m: Message = { me: true, content };
-        return m;
-      } else if (lcMessage._getType() === "ai") {
-        let content: string = "";
-        if (typeof lcMessage.content === "string") {
-          content = lcMessage.content;
-        } else {
-          lcMessage.content.map((c) => {
-            if (c.type === "text") return c.text;
-            else return `![image](${c.image_url})`;
-          });
+        case "ai": {
+          const m: Message = {
+            type: "ai",
+            from: aiName,
+            content,
+          };
+          return m;
         }
-        const m: Message = { me: false, from: aiName, content };
-        return m;
-      } else {
-        return null;
+        case "system": {
+          const m: Message = {
+            type: "system",
+            content,
+          };
+          return m;
+        }
+        case "function": {
+          invariant(lcMessage._getType() === "function");
+          const m: Message = {
+            type: "function",
+            name: lcMessage.name ?? "Function name",
+            kwargs: lcMessage.additional_kwargs,
+            content,
+          };
+          return m;
+        }
+        default:
+          return null;
       }
-    })
-    .filter((e): e is Message => Boolean(e));
+    } else {
+      return null;
+    }
+  });
+  const messages = messagesOrNull.filter((m): m is Message => m !== null);
   return messages;
 }
 
