@@ -9,14 +9,14 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Bot, Message } from "@/types";
 import { ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
-interface Props {
+interface Props extends ComponentProps<"div"> {
   bot: Bot;
 }
 
-export function DemoSheet({ bot }: Props) {
+export function DemoSheet({ bot, children }: Props) {
   const [debugMode, setDebugMode] = useState(true);
   const form = useForm({ defaultValues: { message: "" } });
   const [messages, setMessages] = useState<Message[]>([]);
@@ -39,9 +39,7 @@ export function DemoSheet({ bot }: Props) {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant={"secondary"} className="w-full">
-            Demo chatbot
-          </Button>
+          {children}
         </SheetTrigger>
         <SheetContent>
           <div className="relative h-full">

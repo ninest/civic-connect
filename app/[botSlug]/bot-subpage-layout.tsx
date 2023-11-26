@@ -15,7 +15,7 @@ export const BotSubPageLayout = ({
   const path = usePathname();
   return (
     <>
-      <header className="h-[4rem] flex px-5 items-center border-b">
+      <header className="h-[3rem] text-sm md:h-[4rem] md:text-base flex px-5 items-center border-b">
         <div className="flex items-center space-x-2">
           {crumbs.map((crumb, i) => {
             if (i === 0)

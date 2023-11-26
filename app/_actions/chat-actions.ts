@@ -28,8 +28,6 @@ export async function getMessagesAction(
   const bot = await botService.getById(botId);
   const forms = await formService.getMany(botId);
 
-  console.log(previousMessages);
-
   const model = chatModel.bind({ functions: createFunctions(bot, forms) });
 
   const latestHumanMessage = previousMessages[0].content;
@@ -45,8 +43,6 @@ export async function getMessagesAction(
   );
   const lcMessagesWithContext = [...lcMessages];
 
-  console.log(lcMessagesWithContext);
-
   const lastMessage = lcMessages.at(-1);
   invariant(lastMessage != undefined, "Last message exists");
   const lastMessageWithContext = lcMessagesWithContext.at(-1);
@@ -59,7 +55,6 @@ export async function getMessagesAction(
   // );
 
   const nextMessage = await model.invoke(lcMessagesWithContext);
-  console.log(nextMessage);
 
   if (nextMessage.additional_kwargs.function_call) {
     // Submit a form!
