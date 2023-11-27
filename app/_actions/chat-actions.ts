@@ -28,16 +28,22 @@ export async function getMessagesAction(
   const bot = await botService.getById(botId);
   const forms = await formService.getMany(botId);
 
-  const model = chatModel.bind({ functions: createFunctions(bot, forms) });
+  const functions = createFunctions(bot, forms);
+  console.log(JSON.stringify(functions))
+  const model = chatModel.bind({ functions });
 
   const latestHumanMessage = previousMessages[0].content;
 
-  // const docs = await vectorStore.similaritySearch(latestHumanMessage);
-  // let knowledge = "";
-  // for (const doc of docs) knowledge += `${doc.pageContent}\n`;
+  const docs = await vectorStore.similaritySearch(latestHumanMessage);
+  let knowledge = "";
+  for (const doc of docs) knowledge += `${doc.pageContent}\n`;
 
   const lcMessages = uiToLangchainMessages(
-    createInitialPrompt(bot, forms),
+    createInitialPrompt(
+      bot,
+      forms
+      // knowledge,
+    ),
     // Filter to ensure the system prompt is not duplicated
     previousMessages.filter((m) => m.type !== "system")
   );

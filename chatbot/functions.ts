@@ -6,7 +6,7 @@ export function createFunctions(bot: Bot, forms: FormWithFields[]) {
     form.fields.forEach((field) => {
       properties[field.fieldName] = {
         type: field.valueType,
-        description: field.description,
+        description: `${field.description}. This value may not be unknown`,
       };
     });
     return {
