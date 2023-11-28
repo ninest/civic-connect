@@ -15,6 +15,10 @@ The documents contain:
 - Press releases and news related to Seth Moulton`,
   });
   await categoryService.add(sethMoultonBot.id, {
+    name: "General",
+    description: "Any conversation that does not belong in the other categories.",
+  });
+  await categoryService.add(sethMoultonBot.id, {
     name: "Housing",
     description: "Everything related to housing and homelessness.",
   });

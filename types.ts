@@ -57,3 +57,10 @@ export type FormSubmission = {
   fields: FormFieldType[];
   fieldValues: FormSubmissionType;
 };
+
+export type Conversation = {
+  id: string;
+  name: string;
+  messages: Message[];
+  rating?: number;
+};

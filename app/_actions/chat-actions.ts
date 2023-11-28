@@ -1,5 +1,6 @@
 "use server";
 
+import { categoryChain, categoryParser, getConversationCategory } from "@/chatbot/categorize";
 import { createFunctions } from "@/chatbot/functions";
 import { createInitialPrompt } from "@/chatbot/prompt";
 import { chatModel } from "@/langchain/chat";
@@ -38,11 +39,7 @@ export async function getMessagesAction(
   for (const doc of docs) knowledge += `${doc.pageContent}\n`;
 
   const lcMessages = uiToLangchainMessages(
-    createInitialPrompt(
-      bot,
-      forms
-      // knowledge
-    ),
+    createInitialPrompt(bot, forms, knowledge),
     // Filter to ensure the system prompt is not duplicated
     previousMessages.filter((m) => m.type !== "system")
   );
@@ -52,12 +49,6 @@ export async function getMessagesAction(
   invariant(lastMessage != undefined, "Last message exists");
   const lastMessageWithContext = lcMessagesWithContext.at(-1);
   invariant(lastMessageWithContext != undefined, "Last message wo exists");
-
-  // @ts-ignore
-  // lastMessageWithContext.content = addToLangchainMessageContent(
-  //   lastMessageWithContext.content,
-  //   `\nHere is some context that may be relevant for this question: ${knowledge}`
-  // );
 
   const nextMessage = await model.invoke(lcMessagesWithContext);
 
@@ -74,6 +65,16 @@ export async function getMessagesAction(
   const prevUiMessages = langchainToUiMessages(debug ? lcMessagesWithContext : lcMessages, bot.name);
   const latestUiMessage = langchainToUiMessage(nextMessage, bot.name);
 
-  if (latestUiMessage) return [...prevUiMessages, latestUiMessage];
-  else return [...prevUiMessages];
+  let uiMessagesToReturn: Message[] = [];
+
+  if (latestUiMessage) uiMessagesToReturn = [...prevUiMessages, latestUiMessage];
+  else uiMessagesToReturn = [...prevUiMessages];
+
+  // Try categorize
+  const uiMessagesWithoutSystemPrompt = [...uiMessagesToReturn];
+  uiMessagesWithoutSystemPrompt.shift();
+  const cats = await getConversationCategory(uiMessagesWithoutSystemPrompt, bot.categories);
+  console.log(cats);
+
+  return uiMessagesToReturn;
 }
