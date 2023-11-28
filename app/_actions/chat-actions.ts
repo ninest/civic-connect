@@ -29,7 +29,6 @@ export async function getMessagesAction(
   const forms = await formService.getMany(botId);
 
   const functions = createFunctions(bot, forms);
-  console.log(JSON.stringify(functions))
   const model = chatModel.bind({ functions });
 
   const latestHumanMessage = previousMessages[0].content;
@@ -42,7 +41,7 @@ export async function getMessagesAction(
     createInitialPrompt(
       bot,
       forms
-      // knowledge,
+      // knowledge
     ),
     // Filter to ensure the system prompt is not duplicated
     previousMessages.filter((m) => m.type !== "system")

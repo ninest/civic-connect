@@ -3,20 +3,21 @@
 import { getMessagesAction } from "@/app/_actions/chat-actions";
 import { Chat } from "@/components/chat";
 import { Spacer } from "@/components/spacer";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Bot, Message } from "@/types";
-import { ChevronRight } from "lucide-react";
+import { Bot, FormWithBotIdWithFields, Message } from "@/types";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { ComponentProps, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Props extends ComponentProps<"div"> {
   bot: Bot;
+  forms: FormWithBotIdWithFields[];
 }
 
-export function DemoSheet({ bot, children }: Props) {
+export function DemoSheet({ bot, forms, children }: Props) {
   const [debugMode, setDebugMode] = useState(true);
   const form = useForm({ defaultValues: { message: "" } });
   const [messages, setMessages] = useState<Message[]>([]);
@@ -38,9 +39,7 @@ export function DemoSheet({ bot, children }: Props) {
   return (
     <>
       <Sheet>
-        <SheetTrigger asChild>
-          {children}
-        </SheetTrigger>
+        <SheetTrigger asChild>{children}</SheetTrigger>
         <SheetContent>
           <div className="relative h-full">
             <div className="flex items-center space-x-2">
@@ -53,11 +52,26 @@ export function DemoSheet({ bot, children }: Props) {
             </div>
             <Spacer className="h-5" />
 
-            <div className="h-full overflow-y-scroll pb-40">
+            <div className="h-full overflow-y-scroll pb-96">
               <Chat loading={form.formState.isSubmitting} messages={messages} debug={debugMode} />
             </div>
 
             <div className="absolute bottom-0 left-0 right-0">
+              <div className="space-y-2 mb-2">
+                {forms.map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => {
+                      form.setValue("message", f.prompt);
+                      onSubmit();
+                    }}
+                    className="text-left bg-gray-50 p-2 text-sm rounded-md flex items-center"
+                  >
+                    <span>{f.prompt}</span>
+                    <ArrowRight className="ml-2 w-3 h-3" />
+                  </button>
+                ))}
+              </div>
               <div className="relative">
                 <Form {...form}>
                   <form onSubmit={onSubmit}>

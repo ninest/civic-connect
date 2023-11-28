@@ -34,6 +34,7 @@ export const prismaTransformer = {
       name: form.name,
       description: form.description,
       instructions: form.instructions,
+      prompt: form.prompt,
       botId: form.botId,
     };
 

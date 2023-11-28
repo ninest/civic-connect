@@ -11,7 +11,7 @@ export function createFunctions(bot: Bot, forms: FormWithFields[]) {
     });
     return {
       name: `${form.name}_form`,
-      description: `${form.description}\n\n${form.instructions}`,
+      description: `${form.description}`,
       parameters: {
         type: "object",
         properties,

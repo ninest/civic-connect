@@ -27,6 +27,7 @@ The documents contain:
     name: "Opinions",
     description: "A form to collect opinions from users",
     instructions: "Collect a user's opinions",
+    prompt: "I would like to share an opinion",
   });
   await formService.editFields(opinionsForm.id, {
     fields: [
@@ -44,6 +45,37 @@ The documents contain:
         fieldName: "Opinion",
         valueType: "string",
         description: "The user's actual opinion",
+      },
+    ],
+  });
+
+  const emergencyForm = await formService.create(sethMoultonBot.id, {
+    name: "Emergency",
+    description: "A form to collect urgent emergencies",
+    instructions: "Collect a user's urgent emergency situation",
+    prompt: "I am in an emergency and I have to share information",
+  });
+  await formService.editFields(emergencyForm.id, {
+    fields: [
+      {
+        fieldName: "Name",
+        valueType: "string",
+        description: "The user's name",
+      },
+      {
+        fieldName: "Contact information",
+        valueType: "string",
+        description: "The user's email or phone number",
+      },
+      {
+        fieldName: "Currently in danger",
+        valueType: "string",
+        description: "Yes/No if the user is currently in danger",
+      },
+      {
+        fieldName: "Details",
+        valueType: "string",
+        description: "Extra details about the emergency",
       },
     ],
   });

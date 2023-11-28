@@ -29,6 +29,7 @@ export type Form = {
   name: string;
   description: string;
   instructions: string;
+  prompt: string;
 };
 export type FormWithBotId = Form & { botId: string };
 

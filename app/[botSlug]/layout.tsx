@@ -3,6 +3,8 @@ import { SidebarLink } from "@/app/[botSlug]/sidebar-link";
 import { DemoSheet } from "@/app/demo-sheet";
 import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";
+import { formService } from "@/services/form";
+import { formSubmissionSchema } from "@/services/schemas";
 import { PanelRight, Share2 } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -19,6 +21,7 @@ export async function generateMetadata({ params }: { params: Params }) {
 
 export default async function BotPageLayout({ params, children }: { params: Params; children: ReactNode }) {
   const bot = await botService.getBySlug(params.botSlug);
+  const forms = await formService.getMany(bot.id);
 
   const links = [
     { iconSlug: "Edit2", title: "Edit", href: `/${bot.slug}/edit` },
@@ -50,7 +53,7 @@ export default async function BotPageLayout({ params, children }: { params: Para
             </div>
 
             <section className="p-5 flex items-center space-x-3">
-              <DemoSheet bot={bot}>
+              <DemoSheet bot={bot} forms={forms}>
                 <Button variant={"secondary"} className="w-full">
                   Demo chatbot
                 </Button>
@@ -67,6 +70,7 @@ export default async function BotPageLayout({ params, children }: { params: Para
         <div className="md:hidden">
           <MobileHeader
             bot={bot}
+            forms={forms}
             drawer={
               <section className="p-2 pl-3 space-y-2 mb-5">
                 {links.map((link, i) => (
