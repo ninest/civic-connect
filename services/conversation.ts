@@ -35,4 +35,8 @@ export const conversationService = {
     const conversations = await prisma.conversation.findMany({ where: { botId }, include: { categories: true } });
     return conversations.map(prismaTransformer.conversationWithCategories);
   },
+  async count(botId: string) {
+    const count = await prisma.conversation.count({ where: { botId } });
+    return count;
+  },
 };

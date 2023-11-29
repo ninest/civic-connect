@@ -72,4 +72,9 @@ export const prismaTransformer = {
       categories: c.categories.map(prismaTransformer.category),
     };
   },
+  categoriesWithConversationCount: (
+    cwcc: Prisma.CategoryGetPayload<{ select: { id: true; name: true; _count: { select: { conversations: true } } } }>
+  ) => {
+    return { id: cwcc.id, name: cwcc.name, conversationsCount: cwcc._count.conversations };
+  },
 };
