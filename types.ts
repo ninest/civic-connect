@@ -64,3 +64,7 @@ export type Conversation = {
   messages: Message[];
   rating?: number;
 };
+
+export type ConversationWithCategories = Conversation & {
+  categories: Category[];
+};

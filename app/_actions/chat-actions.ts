@@ -80,6 +80,7 @@ export async function getMessagesAction(
       // update existing
       await conversationService.upsert(conversationId, uiMessagesToReturn, cats);
     }
+    revalidatePath(urls.chat(bot.slug));
   }
 
   return { messages: uiMessagesToReturn, conversationId: cid ?? conversationId };

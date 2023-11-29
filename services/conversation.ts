@@ -31,4 +31,8 @@ export const conversationService = {
       },
     });
   },
+  async getMany(botId: string) {
+    const conversations = await prisma.conversation.findMany({ where: { botId }, include: { categories: true } });
+    return conversations.map(prismaTransformer.conversationWithCategories);
+  },
 };

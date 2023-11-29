@@ -1,4 +1,5 @@
 export const urls = {
+  chat: (botSlug: string) => `/${botSlug}`,
   bot: {
     create: () => `/create`,
     edit: (botSlug: string) => `/${botSlug}/edit`,
@@ -14,7 +15,7 @@ export const urls = {
     formSubmissions: (botSlug: string, formId: string) => `/${botSlug}/forms/${formId}/submissions`,
 
     integrations: (botSlug: string) => `/${botSlug}/integrations`,
-    
+
     analytics: (botSlug: string) => `/${botSlug}/analytics`,
   },
 };

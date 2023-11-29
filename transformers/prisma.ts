@@ -11,6 +11,7 @@ import {
   FormWithBotIdWithFields,
   FormWithFields,
   Conversation,
+  ConversationWithCategories,
 } from "@/types";
 import { Prisma } from "@prisma/client";
 
@@ -58,6 +59,17 @@ export const prismaTransformer = {
       messages: c.messages,
       name: c.name,
       rating: c.rating,
+    };
+  },
+  conversationWithCategories: (
+    c: Prisma.ConversationGetPayload<{ include: { categories: true } }>
+  ): ConversationWithCategories => {
+    return {
+      id: c.id,
+      messages: c.messages,
+      name: c.name,
+      rating: c.rating ?? undefined,
+      categories: c.categories.map(prismaTransformer.category),
     };
   },
 };
