@@ -5,7 +5,8 @@
 /* Space */
 @layer base {
   .space-x {
-    @apply md:max-w-[60ch] lg:max-w-[80ch] mx-5 md:mx-auto;
+    /* @apply md:max-w-[60ch] lg:max-w-[80ch] mx-5 md:mx-auto; */
+    @apply mx-5 lg:max-w-[70ch] lg:mx-auto xl:max-w-[80ch] 2xl:max-w-[90ch]
   }
 }
 

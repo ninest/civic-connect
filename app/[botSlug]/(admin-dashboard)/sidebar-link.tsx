@@ -3,7 +3,7 @@
 import { IconSlug, iconMap } from "@/utils/icon";
 import { cn } from "@/utils/style";
 import Link from "next/link";
-import { usePathname, useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export const SidebarLink = ({ iconSlug, title, href }: { iconSlug: IconSlug; title: string; href: string }) => {
   const path = usePathname();

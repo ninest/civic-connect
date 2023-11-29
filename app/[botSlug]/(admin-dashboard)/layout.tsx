@@ -4,9 +4,8 @@ import { DemoSheet } from "@/app/demo-sheet";
 import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
-import { formSubmissionSchema } from "@/services/schemas";
-import { PanelRight, Share2 } from "lucide-react";
-import { ReactNode } from "react";
+import { Share2 } from "lucide-react";
+import { ComponentProps, ReactNode } from "react";
 
 interface Params {
   botSlug: string;
@@ -23,13 +22,13 @@ export default async function BotPageLayout({ params, children }: { params: Para
   const bot = await botService.getBySlug(params.botSlug);
   const forms = await formService.getMany(bot.id);
 
-  const links = [
+  const links: ComponentProps<typeof SidebarLink>[] = [
     { iconSlug: "Edit2", title: "Edit", href: `/${bot.slug}/edit` },
     { iconSlug: "File", title: "Documents", href: `/${bot.slug}/documents` },
     { iconSlug: "FormInput", title: "Forms", href: `/${bot.slug}/forms` },
+    { iconSlug: "MessagesSquare", title: "Conversations", href: `/${bot.slug}/conversations` },
     { iconSlug: "BarChart2", title: "Analytics", href: `/${bot.slug}/analytics` },
     { iconSlug: "Blocks", title: "Integrations", href: `/${bot.slug}/integrations` },
-    { iconSlug: "MessagesSquare", title: "Conversations", href: `/${bot.slug}/conversations` },
   ];
 
   return (

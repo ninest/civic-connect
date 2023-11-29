@@ -6,7 +6,7 @@ import { Bot, FormWithBotIdWithFields } from "@/types";
 import { MessageSquare, PanelRight } from "lucide-react";
 import { ReactNode, useState } from "react";
 
-export function MobileHeader({ bot, forms, drawer }: { bot: Bot; forms: FormWithBotIdWithFields; drawer: ReactNode }) {
+export function MobileHeader({ bot, forms, drawer }: { bot: Bot; forms: FormWithBotIdWithFields[]; drawer: ReactNode }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
