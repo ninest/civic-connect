@@ -17,7 +17,7 @@ export function Chat({ messages, loading, debug = false }: ChatProps) {
     <div className="text-sm">
       <ul className="space-y-5 md:space-y-5">
         {messages
-          .filter((message) => (debug ? true : ["ai", "human"].includes(message.type)))
+          .filter((message) => (debug ? true : ["ai", "human",'function'].includes(message.type)))
           .map((message, i) => {
             if (message.type === "human") {
               return (

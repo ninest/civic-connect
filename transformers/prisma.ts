@@ -10,6 +10,7 @@ import {
   FormWithBotId,
   FormWithBotIdWithFields,
   FormWithFields,
+  Conversation,
 } from "@/types";
 import { Prisma } from "@prisma/client";
 
@@ -49,6 +50,14 @@ export const prismaTransformer = {
       formId: fs.formId,
       fields: fs.fields,
       fieldValues: fs.fieldValues,
+    };
+  },
+  conversation: (c: Prisma.ConversationGetPayload<{}>): Conversation => {
+    return {
+      id: c.id,
+      messages: c.messages,
+      name: c.name,
+      rating: c.rating,
     };
   },
 };

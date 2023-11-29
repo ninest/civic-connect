@@ -1,5 +1,5 @@
-import { MobileHeader } from "@/app/[botSlug]/mobile-header";
-import { SidebarLink } from "@/app/[botSlug]/sidebar-link";
+import { MobileHeader } from "@/app/[botSlug]/(admin-dashboard)/mobile-header";
+import { SidebarLink } from "@/app/[botSlug]/(admin-dashboard)/sidebar-link";
 import { DemoSheet } from "@/app/demo-sheet";
 import { Button } from "@/components/ui/button";
 import { botService } from "@/services/bot";

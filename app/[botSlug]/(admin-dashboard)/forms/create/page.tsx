@@ -1,5 +1,5 @@
-import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
-import { FormForm } from "@/app/[botSlug]/forms/form-form";
+import { BotSubPageLayout } from "@/app/[botSlug]/(admin-dashboard)/bot-subpage-layout";
+import { FormForm } from "@/app/[botSlug]/(admin-dashboard)/forms/form-form";
 import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
 

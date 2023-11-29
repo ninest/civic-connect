@@ -1,5 +1,5 @@
-import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
-import { BotCategoryForm } from "@/app/[botSlug]/edit/bot-category-form";
+import { BotSubPageLayout } from "@/app/[botSlug]/(admin-dashboard)/bot-subpage-layout";
+import { BotCategoryForm } from "@/app/[botSlug]/(admin-dashboard)/edit/bot-category-form";
 import { categoryService } from "@/services/category";
 import { urls } from "@/urls";
 

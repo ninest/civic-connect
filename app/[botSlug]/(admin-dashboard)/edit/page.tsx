@@ -1,5 +1,5 @@
-import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
-import { BotEditForm } from "@/app/[botSlug]/edit/edit-bot-form";
+import { BotSubPageLayout } from "@/app/[botSlug]/(admin-dashboard)/bot-subpage-layout";
+import { BotEditForm } from "@/app/[botSlug]/(admin-dashboard)/edit/edit-bot-form";
 import { Card } from "@/components/card";
 import { NoElementsEmpty } from "@/components/empty";
 import { Spacer } from "@/components/spacer";

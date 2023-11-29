@@ -1,4 +1,4 @@
-import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
+import { BotSubPageLayout } from "@/app/[botSlug]/(admin-dashboard)/bot-subpage-layout";
 import { Card } from "@/components/card";
 import { Empty, NoElementsEmpty } from "@/components/empty";
 import { Spacer } from "@/components/spacer";

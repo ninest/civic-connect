@@ -1,5 +1,5 @@
-import { BotSubPageLayout } from "@/app/[botSlug]/bot-subpage-layout";
-import { DeleteFormSubmissionButton } from "@/app/[botSlug]/forms/[formId]/submissions/delete-form-submission-button";
+import { BotSubPageLayout } from "@/app/[botSlug]/(admin-dashboard)/bot-subpage-layout";
+import { DeleteFormSubmissionButton } from "@/app/[botSlug]/(admin-dashboard)/forms/[formId]/submissions/delete-form-submission-button";
 import { deleteFormSubmissionAction } from "@/app/_actions/form-submissions-action";
 import { Card } from "@/components/card";
 import { NoElementsEmpty } from "@/components/empty";

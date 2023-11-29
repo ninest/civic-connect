@@ -1,19 +1,13 @@
 "use server";
 
-import { categoryChain, categoryParser, getConversationCategory } from "@/chatbot/categorize";
+import { getConversationCategory } from "@/chatbot/categorize";
 import { createFunctions } from "@/chatbot/functions";
 import { createInitialPrompt } from "@/chatbot/prompt";
 import { chatModel } from "@/langchain/chat";
-import {
-  addToLangchainMessageContent,
-  getLangchainMessageContent,
-  langchainToUiMessage,
-  langchainToUiMessages,
-  uiToLangchainMessage,
-  uiToLangchainMessages,
-} from "@/langchain/messages";
+import { langchainToUiMessage, langchainToUiMessages, uiToLangchainMessages } from "@/langchain/messages";
 import { vectorStore } from "@/langchain/vectorspaces";
 import { botService } from "@/services/bot";
+import { conversationService } from "@/services/conversation";
 import { formService } from "@/services/form";
 import { formSubmissionService } from "@/services/form-submissions";
 import { Message } from "@/types";
@@ -24,8 +18,8 @@ import invariant from "tiny-invariant";
 export async function getMessagesAction(
   botId: string,
   previousMessages: Message[],
-  debug: boolean = false
-): Promise<Message[]> {
+  { debug = false, save = false, conversationId }: { debug?: boolean; save?: boolean; conversationId?: null | string }
+): Promise<{ messages: Message[]; conversationId?: null | string }> {
   const bot = await botService.getById(botId);
   const forms = await formService.getMany(botId);
 
@@ -74,7 +68,19 @@ export async function getMessagesAction(
   const uiMessagesWithoutSystemPrompt = [...uiMessagesToReturn];
   uiMessagesWithoutSystemPrompt.shift();
   const cats = await getConversationCategory(uiMessagesWithoutSystemPrompt, bot.categories);
-  console.log(cats);
 
-  return uiMessagesToReturn;
+  // Save conversation if necessary
+  let cid;
+  if (save) {
+    if (!conversationId) {
+      // Create a conversationId
+      const newConversation = await conversationService.create(bot.id, uiMessagesToReturn, cats);
+      cid = newConversation.id;
+    } else {
+      // update existing
+      await conversationService.upsert(conversationId, uiMessagesToReturn, cats);
+    }
+  }
+
+  return { messages: uiMessagesToReturn, conversationId: cid ?? conversationId };
 }
