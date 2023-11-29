@@ -4,8 +4,8 @@ import { botService } from "@/services/bot";
 import { formService } from "@/services/form";
 
 export default async function BotEditPage({ params }: { params: { botSlug: string } }) {
-  const bot = await botService.getBotBySlug(params.botSlug);
-  const forms = await formService.getForms(bot.id);
+  const bot = await botService.getBySlug(params.botSlug);
+  const forms = await formService.getMany(bot.id);
 
   return (
     <BotSubPageLayout crumbs={[{ title: "Forms" }, { title: "New" }]}>

@@ -1,4 +1,4 @@
-import { NewBotForm } from "@/app/new-bot/new-bot-form";
+import { NewBotForm } from "@/app/create/new-bot-form";
 import { Spacer } from "@/components/spacer";
 import { Title } from "@/components/typography/title";
 

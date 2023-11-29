@@ -1,6 +1,8 @@
 "use client";
 
 import { editBotAction } from "@/app/_actions/bot-actions";
+import { NoElementsEmpty } from "@/components/empty";
+import { Title } from "@/components/typography/title";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -52,13 +54,16 @@ export function BotEditForm({ botId, defaultValues }: Props) {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea {...field} />
+                  <Textarea {...field}  rows={10}/>
                 </FormControl>
-                <FormDescription>This should contain information on who the bot is and what it can answer questions on.</FormDescription>
+                <FormDescription>
+                  This should contain information on who the bot is and what it can answer questions on. Include information on what the documents are about.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <div>
             <Button>Save</Button>
           </div>

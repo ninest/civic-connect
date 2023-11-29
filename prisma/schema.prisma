@@ -10,19 +10,38 @@ datasource db {
 }
 
 model Bot {
-  id   String @id @default(uuid())
-  slug String @unique
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name        String
   description String
 
+  categories    Category[]
   documents     Document[]
   forms         Form[]
   conversations Conversation[]
 }
 
+model Category {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String
+
+  bot   Bot    @relation(fields: [botId], references: [id])
+  botId String
+
+  conversations Conversation[]
+}
+
 model Document {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
@@ -34,7 +53,9 @@ model Document {
 }
 
 model Form {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   botId String
   bot   Bot    @relation(fields: [botId], references: [id])
@@ -42,13 +63,15 @@ model Form {
   name         String
   description  String
   instructions String // prompt and details
+  prompt       String // prompt for UI
 
   fields      Json
   submissions FormSubmission[]
 }
 
 model FormSubmission {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
 
   formId String
   form   Form   @relation(fields: [formId], references: [id])
@@ -67,5 +90,7 @@ model Conversation {
   name     String
   messages Json
 
-  rating Int
+  categories Category[]
+
+  rating Int?
 }
