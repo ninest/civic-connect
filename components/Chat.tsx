@@ -65,7 +65,7 @@ export function Chat({ messages, loading, debug = false }: ChatProps) {
               );
             }
           })}
-        {loading && <div>Loading ...</div>}
+        {loading && <div className="text-muted-foreground">Loading ...</div>}
       </ul>
     </div>
   );
