@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FormFormSchema, FormFormType } from "@/services/schemas";
+import { formFormSchema, FormFormType } from "@/services/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -23,7 +23,7 @@ type Props = (BotProps | FormProps) & { defaultValues?: Partial<FormFormType> };
 
 export function FormForm({ botId, formId, defaultValues }: Props) {
   const editing = !!formId && !botId;
-  const form = useForm<FormFormType>({ resolver: zodResolver(FormFormSchema), defaultValues });
+  const form = useForm<FormFormType>({ resolver: zodResolver(formFormSchema), defaultValues });
 
   const onSubmit = form.handleSubmit(async (data) => {
     if (editing) await editFormAction(formId, data);

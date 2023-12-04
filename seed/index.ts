@@ -7,12 +7,16 @@ import fs from "fs/promises";
 
 (async () => {
   const sethMoultonBot = await botService.create({
-    name: "Seth Moulton",
+    name: "Moulton Bot",
     description: `The chatbot for Congressman Seth Moulton, that can answer questions about Congressman Seth Moulton in Salem, MA, and collect opinions and other information from constituents.
 
 The documents contain:
 - Information on Seth Moulton and his congressional office
 - Press releases and news related to Seth Moulton`,
+    conversationStarters: [
+      "I would like to share a legislative opinion",
+      "I would like to know Seth Moulton's opinions on a specific topic",
+    ],
   });
   await categoryService.add(sethMoultonBot.id, {
     name: "General",
@@ -26,12 +30,23 @@ The documents contain:
     name: "Healthcare",
     description: "Everything related to healthcare and health insurance",
   });
+  await categoryService.add(sethMoultonBot.id, {
+    name: "Gun control",
+    description: "Everything related to guns and gun control",
+  });
+  await categoryService.add(sethMoultonBot.id, {
+    name: "Animal welfare",
+    description: "Everything related to animals and welfare",
+  });
+  await categoryService.add(sethMoultonBot.id, {
+    name: "Israel Palestine",
+    description: "Everything related to the Israel Palestine conflict",
+  });
 
   const opinionsForm = await formService.create(sethMoultonBot.id, {
     name: "Opinions",
     description: "A form to collect opinions from users",
     instructions: "Collect a user's opinions",
-    prompt: "I would like to share an opinion",
   });
   await formService.editFields(opinionsForm.id, {
     fields: [
@@ -49,37 +64,6 @@ The documents contain:
         fieldName: "Opinion",
         valueType: "string",
         description: "The user's actual opinion",
-      },
-    ],
-  });
-
-  const emergencyForm = await formService.create(sethMoultonBot.id, {
-    name: "Emergency",
-    description: "A form to collect urgent emergencies",
-    instructions: "Collect a user's urgent emergency situation",
-    prompt: "I am in an emergency and I have to share information",
-  });
-  await formService.editFields(emergencyForm.id, {
-    fields: [
-      {
-        fieldName: "Name",
-        valueType: "string",
-        description: "The user's name",
-      },
-      {
-        fieldName: "Contact information",
-        valueType: "string",
-        description: "The user's email or phone number",
-      },
-      {
-        fieldName: "Currently in danger",
-        valueType: "string",
-        description: "Yes/No if the user is currently in danger",
-      },
-      {
-        fieldName: "Details",
-        valueType: "string",
-        description: "Extra details about the emergency",
       },
     ],
   });

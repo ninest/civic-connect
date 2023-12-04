@@ -20,6 +20,7 @@ export default async function ChatPage({ params }: Props) {
   return (
     <>
       <main className="h-screen  space-x">
+        <Spacer className="h-3" />
         <Title level={1}>{bot.name}</Title>
 
         <Spacer className="h-5" />

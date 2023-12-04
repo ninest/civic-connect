@@ -70,18 +70,18 @@ export async function getMessagesAction(
   const cats = await getConversationCategory(uiMessagesWithoutSystemPrompt, bot.categories);
 
   // Save conversation if necessary
-  let cid;
-  if (save) {
-    if (!conversationId) {
-      // Create a conversationId
-      const newConversation = await conversationService.create(bot.id, uiMessagesToReturn, cats);
-      cid = newConversation.id;
-    } else {
-      // update existing
-      await conversationService.upsert(conversationId, uiMessagesToReturn, cats);
-    }
-    revalidatePath(urls.chat(bot.slug));
-  }
+  // let cid;
+  // if (save) {
+  //   if (!conversationId) {
+  //     // Create a conversationId
+  //     const newConversation = await conversationService.create(bot.id, uiMessagesToReturn, cats);
+  //     cid = newConversation.id;
+  //   } else {
+  //     // update existing
+  //     await conversationService.upsert(conversationId, uiMessagesToReturn, cats);
+  //   }
+  //   revalidatePath(urls.chat(bot.slug));
+  // }
 
-  return { messages: uiMessagesToReturn, conversationId: cid ?? conversationId };
+  return { messages: uiMessagesToReturn, /* conversationId: cid ?? conversationId  */};
 }

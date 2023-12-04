@@ -6,6 +6,7 @@ export type DocumentType = z.infer<typeof documentSchema>;
 export const newBotFormSchema = z.object({
   name: z.string().min(5),
   description: z.string().min(5),
+  conversationStarters: z.array(z.string().min(3)),
 });
 export type NewBotFormType = z.infer<typeof newBotFormSchema>;
 
@@ -26,13 +27,12 @@ export const editBotDocumentsFormSchema = z.object({
 });
 export type EditBotDocumentsFormType = z.infer<typeof editBotDocumentsFormSchema>;
 
-export const FormFormSchema = z.object({
+export const formFormSchema = z.object({
   name: z.string().min(5),
   description: z.string().min(5),
   instructions: z.string().min(5),
-  prompt: z.string().min(5),
 });
-export type FormFormType = z.infer<typeof FormFormSchema>;
+export type FormFormType = z.infer<typeof formFormSchema>;
 
 export const formFieldSchema = z.object({
   fieldName: z.string().min(2),

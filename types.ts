@@ -5,6 +5,7 @@ export type Bot = {
   slug: string;
   name: string;
   description: string;
+  conversationStarters: string[];
 };
 
 export type Category = {
@@ -29,7 +30,6 @@ export type Form = {
   name: string;
   description: string;
   instructions: string;
-  prompt: string;
 };
 export type FormWithBotId = Form & { botId: string };
 

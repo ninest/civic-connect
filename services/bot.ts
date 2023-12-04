@@ -12,6 +12,7 @@ export const botService = {
         name: params.name,
         slug: slugify(params.name),
         description: params.description,
+        conversationStarters: params.conversationStarters,
       },
     });
     return prismaTransformer.bot(newBot);
