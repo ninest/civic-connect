@@ -22,11 +22,10 @@ export default async function ChatPage({ params }: Props) {
 
   return (
     <>
-      <main className="h-screen [--top-bar-height:4rem]">
-        <div className="py-5 border-b h-[--top-bar-height] sticky top-0 bg-white">
-          <div className="h-full md:max-w-[50rem] md:px-0 mx-auto px-5 font-bold text-lg flex items-center justify-between">
-            <div className="">{bot.name}</div>
-
+      <main className="min-h-screen [--top-bar-height:4rem]">
+        <div className="h-[--top-bar-height] w-full sticky top-0 bg-white border-b">
+          <div className="h-full md:max-w-[50rem] md:px-0 mx-auto px-5 w-full flex items-center justify-between">
+            <div className="font-bold">{bot.name}</div>
             <Button variant={"outline"} size={"sm"} asChild>
               <a href={urls.chat(bot.slug)}>Reset</a>
             </Button>

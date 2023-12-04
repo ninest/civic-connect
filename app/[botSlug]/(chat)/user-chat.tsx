@@ -3,6 +3,7 @@
 import { getMessagesAction } from "@/app/_actions/chat-actions";
 import { Chat } from "@/components/chat";
 import { Spacer } from "@/components/spacer";
+import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Bot, FormWithBotIdWithFields, Message } from "@/types";
@@ -38,15 +39,13 @@ export function UserChat({ bot, forms }: Props) {
     );
     setMessages(newMessages);
     if (existingConversationId) {
-      setConversationId(existingConversationId);
-
-      router.push(`${pathname}#${existingConversationId}`);
+      console.log(existingConversationId);
     }
   });
 
   return (
     <>
-      <div className="md:max-w-[50rem] md:px-0 mx-auto px-5 h-[calc(100vh-var(--top-bar-height))]">
+      <div className="md:max-w-[50rem] md:px-0 mx-auto px-5 h-[calc(100vh-var(--top-bar-height))] ">
         <Spacer className="h-5" />
         <Chat
           loading={form.formState.isSubmitting}
@@ -56,11 +55,26 @@ export function UserChat({ bot, forms }: Props) {
           ]}
           debug={false}
         />
-        <Spacer className="h-40" />
+        <Spacer className="h-[20rem]" />
 
         <div className="fixed bottom-0 left-0 right-0 bg-white py-5 border-t">
+          <div className="md:max-w-[50rem] md:px-0 mx-auto px-5 mb-5 grid grid-cols-2 gap-5">
+            {bot.conversationStarters.map((starter, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  form.setValue("message", starter);
+                  onSubmit();
+                }}
+                className="bg-gray-50 p-2 rounded-md text-sm text-left flex items-center justify-between"
+              >
+                <span>{starter}</span>
+                <ArrowRight className="ml-2 w-3 h-3" />
+              </button>
+            ))}
+          </div>
           <Form {...form}>
-            <form onSubmit={onSubmit} className=" md:max-w-[50rem] md:px-0 mx-auto px-5 ">
+            <form onSubmit={onSubmit} className="md:max-w-[50rem] md:px-0 mx-auto px-5">
               <FormField
                 control={form.control}
                 name="message"
