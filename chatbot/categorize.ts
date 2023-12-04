@@ -38,7 +38,6 @@ ${JSON.stringify(conversation)}`;
     format_instructions: categoryParser.getFormatInstructions(),
   });
 
-  console.log(response);
 
   return response.map((res) => res.id);
 }

@@ -10,7 +10,7 @@ import { botService } from "@/services/bot";
 import { conversationService } from "@/services/conversation";
 import { formService } from "@/services/form";
 import { formSubmissionService } from "@/services/form-submissions";
-import { Category, Message } from "@/types";
+import { Message } from "@/types";
 import { urls } from "@/urls";
 import { revalidatePath } from "next/cache";
 import invariant from "tiny-invariant";
