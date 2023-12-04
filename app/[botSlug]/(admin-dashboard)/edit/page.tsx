@@ -25,7 +25,10 @@ export default async function BotEditPage({ params }: { params: Params }) {
 
   return (
     <BotSubPageLayout crumbs={[{ title: "Edit" }]}>
-      <BotEditForm botId={bot.id} defaultValues={bot} />
+      <BotEditForm
+        botId={bot.id}
+        defaultValues={{ ...bot, conversationStarters: bot.conversationStarters.map((text) => ({ text })) }}
+      />
 
       <Spacer className="h-5" />
       <hr />

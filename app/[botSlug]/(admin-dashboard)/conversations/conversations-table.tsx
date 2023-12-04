@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteConversationAction } from "@/app/_actions/chat-actions";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +14,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
 export type ConversationRow = {
+  id: string;
   name: string;
   categories: string;
   numMessages: number;
@@ -49,6 +51,14 @@ export const conversationColumns: ColumnDef<ConversationRow>[] = [
             <DropdownMenuItem>Share</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Report</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={async () => {
+                await deleteConversationAction(row.original.id);
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

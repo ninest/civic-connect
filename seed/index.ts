@@ -13,9 +13,12 @@ import fs from "fs/promises";
 The documents contain:
 - Information on Seth Moulton and his congressional office
 - Press releases and news related to Seth Moulton`,
+  });
+  await botService.edit(sethMoultonBot.id, {
+    ...sethMoultonBot,
     conversationStarters: [
-      "I would like to share a legislative opinion",
-      "I would like to know Seth Moulton's opinions on a specific topic",
+      { text: "I would like to share a legislative opinion" },
+      { text: "I would like to know Seth Moulton's opinions on a specific topic" },
     ],
   });
   await categoryService.add(sethMoultonBot.id, {
@@ -44,9 +47,9 @@ The documents contain:
   });
 
   const opinionsForm = await formService.create(sethMoultonBot.id, {
-    name: "Opinions",
-    description: "A form to collect opinions from users",
-    instructions: "Collect a user's opinions",
+    name: "Legislative Opinions",
+    description: "A form to collect legislative opinions from users",
+    instructions: "Collect a user's opinions. The opinions must be legislative. Non-legislative opinions should be accepted.",
   });
   await formService.editFields(opinionsForm.id, {
     fields: [
@@ -61,9 +64,9 @@ The documents contain:
         description: "The user's USA zip code",
       },
       {
-        fieldName: "Opinion",
+        fieldName: "Legislative opinion",
         valueType: "string",
-        description: "The user's actual opinion",
+        description: "The user's actual legislative opinion",
       },
     ],
   });

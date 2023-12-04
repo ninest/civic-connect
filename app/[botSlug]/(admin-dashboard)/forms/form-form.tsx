@@ -79,20 +79,6 @@ export function FormForm({ botId, formId, defaultValues }: Props) {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="prompt"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Prompt</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormDescription>Enter a prompt to display in the chatbot interface.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <Button>Save</Button>
         </form>
       </Form>

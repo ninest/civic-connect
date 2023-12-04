@@ -12,7 +12,6 @@ export const botService = {
         name: params.name,
         slug: slugify(params.name),
         description: params.description,
-        conversationStarters: params.conversationStarters,
       },
     });
     return prismaTransformer.bot(newBot);
@@ -34,7 +33,11 @@ export const botService = {
   async edit(id: string, params: EditBotFormType) {
     const bot = await prisma.bot.update({
       where: { id },
-      data: { name: params.name, description: params.description },
+      data: {
+        name: params.name,
+        description: params.description,
+        conversationStarters: params.conversationStarters.map((starter) => starter.text),
+      },
     });
     return prismaTransformer.bot(bot);
   },

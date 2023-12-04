@@ -58,16 +58,16 @@ export function DemoSheet({ bot, forms, children }: Props) {
 
             <div className="absolute bottom-0 left-0 right-0">
               <div className="space-y-2 mb-2">
-                {forms.map((f) => (
+                {bot.conversationStarters.map((starter, i) => (
                   <button
-                    key={f.id}
+                    key={i}
                     onClick={() => {
-                      form.setValue("message", f.prompt);
+                      form.setValue("message", starter);
                       onSubmit();
                     }}
                     className="text-left bg-gray-50 p-2 text-sm rounded-md flex items-center"
                   >
-                    <span>{f.prompt}</span>
+                    <span>{starter}</span>
                     <ArrowRight className="ml-2 w-3 h-3" />
                   </button>
                 ))}

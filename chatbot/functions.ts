@@ -10,7 +10,7 @@ export function createFunctions(bot: Bot, forms: FormWithFields[]) {
       };
     });
     return {
-      name: `${form.name}_form`,
+      name: `${form.name.replaceAll(" ","_")}_form`,
       description: `${form.description}`,
       parameters: {
         type: "object",

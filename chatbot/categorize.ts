@@ -5,10 +5,9 @@ import { PromptTemplate } from "langchain/prompts";
 import { RunnableSequence } from "langchain/schema/runnable";
 import { z } from "zod";
 
+// export const categoryParser = StructuredOutputParser.fromZodSchema(z.array(z.string()));
 export const categoryParser = StructuredOutputParser.fromZodSchema(
-  z.object({
-    categoryIds: z.array(z.string()),
-  })
+  z.array(z.object({ id: z.string(), name: z.string(), description: z.string() }))
 );
 
 export const categoryChain = RunnableSequence.from([
@@ -19,7 +18,7 @@ export const categoryChain = RunnableSequence.from([
   categoryParser,
 ]);
 
-export async function getConversationCategory(conversation: Message[], categories: Category[]): Promise<Category[]> {
+export async function getConversationCategory(conversation: Message[], categories: Category[]): Promise<string[]> {
   // Categories with only relevant details
   const refinedCategories = categories.map((cat) => ({
     id: cat.id,
@@ -39,9 +38,7 @@ ${JSON.stringify(conversation)}`;
     format_instructions: categoryParser.getFormatInstructions(),
   });
 
-  const outputCategories = response.categoryIds
-    .map((cid) => categories.find((c) => c.id === cid))
-    .filter((c): c is Category => Boolean(c));
+  console.log(response);
 
-  return outputCategories;
+  return response.map((res) => res.id);
 }

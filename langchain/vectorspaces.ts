@@ -15,23 +15,3 @@ export const vectorStore = PrismaVectorStore.withModel<Document>(prisma).create(
     },
   }
 );
-
-// export const createDocuments = async (
-//   botId: string,
-//   docs: { name: string; description: string; content: string }[]
-// ) => {
-//   await vectorStore.addModels(
-//     await prisma.$transaction(
-//       docs.map(({ name, description, content }) =>
-//         prisma.document.create({
-//           data: {
-//             botId,
-//             name,
-//             description,
-//             content,
-//           },
-//         })
-//       )
-//     )
-//   );
-// };

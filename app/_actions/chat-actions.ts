@@ -10,7 +10,7 @@ import { botService } from "@/services/bot";
 import { conversationService } from "@/services/conversation";
 import { formService } from "@/services/form";
 import { formSubmissionService } from "@/services/form-submissions";
-import { Message } from "@/types";
+import { Category, Message } from "@/types";
 import { urls } from "@/urls";
 import { revalidatePath } from "next/cache";
 import invariant from "tiny-invariant";
@@ -48,7 +48,7 @@ export async function getMessagesAction(
 
   if (nextMessage.additional_kwargs.function_call) {
     // Submit a form!
-    const formName = nextMessage.additional_kwargs.function_call.name.split("_form")[0];
+    const formName = nextMessage.additional_kwargs.function_call.name.split("_form")[0].replaceAll("_", " ");
     const values = JSON.parse(nextMessage.additional_kwargs.function_call.arguments);
 
     await formSubmissionService.submit(bot.id, formName, values);
@@ -67,21 +67,29 @@ export async function getMessagesAction(
   // Try categorize
   const uiMessagesWithoutSystemPrompt = [...uiMessagesToReturn];
   uiMessagesWithoutSystemPrompt.shift();
-  const cats = await getConversationCategory(uiMessagesWithoutSystemPrompt, bot.categories);
+
+  const catIds = await getConversationCategory(uiMessagesWithoutSystemPrompt, bot.categories);
+  // const cats: Category[] = [];
 
   // Save conversation if necessary
-  // let cid;
-  // if (save) {
-  //   if (!conversationId) {
-  //     // Create a conversationId
-  //     const newConversation = await conversationService.create(bot.id, uiMessagesToReturn, cats);
-  //     cid = newConversation.id;
-  //   } else {
-  //     // update existing
-  //     await conversationService.upsert(conversationId, uiMessagesToReturn, cats);
-  //   }
-  //   revalidatePath(urls.chat(bot.slug));
-  // }
+  let cid;
+  if (save) {
+    if (!conversationId) {
+      // Create a conversationId
+      const newConversation = await conversationService.create(bot.id, uiMessagesToReturn, catIds);
+      cid = newConversation.id;
+    } else {
+      // update existing
+      await conversationService.upsert(conversationId, uiMessagesToReturn, catIds);
+    }
+    revalidatePath(urls.chat(bot.slug));
+  }
 
-  return { messages: uiMessagesToReturn, /* conversationId: cid ?? conversationId  */};
+  return { messages: uiMessagesToReturn, conversationId: cid ?? conversationId };
+}
+
+export async function deleteConversationAction(conversationId: string) {
+  const conversation = await conversationService.delete(conversationId);
+  const bot = await botService.getById(conversation.botId);
+  revalidatePath(urls.bot.conversations(bot.slug));
 }

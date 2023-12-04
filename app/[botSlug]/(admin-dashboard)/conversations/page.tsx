@@ -12,6 +12,7 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
   const conversations = await conversationService.getMany(bot.id);
 
   const data: ConversationRow[] = conversations.map((c) => ({
+    id: c.id,
     name: c.name,
     numMessages: c.messages.length,
     categories: c.categories.map((c) => c.name).join(", "),

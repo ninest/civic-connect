@@ -25,7 +25,7 @@ export default async function BotEditPage({ params }: { params: { botSlug: strin
               const barLength = (cwc.conversationsCount / count) * 100;
               return (
                 <div key={cwc.id} className="h-7 rounded-sm bg-primary-foreground relative">
-                  <div className="h-full bg-primary/20 rounded-l-sm" style={{ width: `${barLength}%` }}></div>
+                  <div className="h-full bg-primary/20 rounded-sm" style={{ width: `${barLength}%` }}></div>
                   <div className="absolute top-1/2 -translate-y-1/2 right-2 z-100 text-xs font-semibold ">
                     {cwc.name}
                   </div>
