@@ -1,6 +1,6 @@
 # Civic Connect
 
-> A platform to create chatbots
+> A platform to create chatbots for constituent engagement 
 
 ## Features
 
@@ -144,3 +144,15 @@ https://github.com/ninest/civic-connect/assets/34677361/27e3bf49-cffe-4088-8bed-
 - [Project pitch deck](https://www.canva.com/design/DAF0BkKEiFg/nFoOQEfieefQ8_63sd_t6w/edit?utm_content=DAF0BkKEiFg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Slack group](https://join.slack.com/t/congressai4impact/shared_invite/zt-2882nx1ba-DYy_rxYa8_v3GXlkEiUNgw)
 - [Project plan document](https://docs.google.com/document/d/1typXe2OvmMHH_WBoVODv8UXTgLfBNDYXhAbyv6pAQwo/edit#heading=h.uioatehl6iil)
+
+### Credits
+
+Group members:
+
+- Ala’a Tamam
+- Isha Chadalavada
+- Rohit Kaushik
+- Parth Kabra
+- Arjun Bhat 
+
+Under the advisement of Prof. Beth Noveck, Prof. Dan Jackson, Marci Harris and the PopVox foundation.
