@@ -1,5 +1,23 @@
 # Civic Connect
 
+> A platform to create chatbots
+
+## Features
+
+- 📄 **Documents**: upload documents to give GPT more context
+- 🖊️ **Forms**: collect user data seamlessly through natural, conversational forms
+- 💬 **Slack integration**: get notified when forms are submitted
+- 📊 **Analytics**: access insights on chatbot usage and user engagement
+
+![Admin dashboard](./assets/2023-12/edit-bot.png)
+
+<p float="left">
+  <img src="./assets/2023-12/chat-example-1.png" />
+  <img src="./assets/2023-12/chat-example-2.png" />
+</p>
+
+[View videos](#Videos)
+
 ## Development
 
 This projects requires
