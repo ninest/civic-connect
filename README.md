@@ -9,12 +9,18 @@
 - 💬 **Slack integration**: get notified when forms are submitted
 - 📊 **Analytics**: access insights on chatbot usage and user engagement
 
+### User chat
+<p align="center">
+  <img src="./assets/2023-12/chat-example-1.png" width="40%" />
+  &nbsp;
+  <img src="./assets/2023-12/chat-example-2.png" width="40%" />
+</p>
+
+### Admin dashboard
+
 ![Admin dashboard](./assets/2023-12/edit-bot.png)
 
-<p float="left">
-  <img src="./assets/2023-12/chat-example-1.png" />
-  <img src="./assets/2023-12/chat-example-2.png" />
-</p>
+
 
 [View videos](#Videos)
 
