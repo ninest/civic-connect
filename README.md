@@ -78,9 +78,7 @@ pnpm dev
 
 The videos are for a chatbot "Moulton Bot" created for [Congressman Seth Moulton's office](https://moulton.house.gov/).
 
-### Chat
-
-https://github.com/ninest/civic-connect/assets/34677361/27e3bf49-cffe-4088-8bed-e7dde1d6666a
+### User chat
 
 ### Bot editing
 
@@ -97,3 +95,7 @@ https://github.com/ninest/civic-connect/assets/34677361/333c8773-5ef0-45c5-9e94-
 ### Form submissions
 
 https://github.com/ninest/civic-connect/assets/34677361/3780371b-a39a-4ad9-8618-2ce66f450629
+
+### Analytics
+
+https://github.com/ninest/civic-connect/assets/34677361/27e3bf49-cffe-4088-8bed-e7dde1d6666a
