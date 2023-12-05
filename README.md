@@ -20,8 +20,6 @@
 
 ![Admin dashboard](./assets/2023-12/edit-bot.png)
 
-
-
 [View videos](#Videos)
 
 ## Development
@@ -37,6 +35,17 @@ After cloning the repository, run
 ```
 pnpm i 
 ```
+
+Create a `.env` file with the following:
+
+```env
+DATABASE_URL=postgres://user:password@localhost:2430/civicconnect_db
+OPENAI_API_KEY=
+```
+
+The database URL `postgres://user:password@localhost:2430/civicconnect_db` is the local development database created in a Docker volume.
+
+Create an OpenAI API key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
 
 To setup the local database and add seed data, run
 
