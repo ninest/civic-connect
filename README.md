@@ -80,6 +80,10 @@ The videos are for a chatbot "Moulton Bot" created for [Congressman Seth Moulton
 
 ### User chat
 
+https://github.com/ninest/civic-connect/assets/34677361/53578f39-8422-4e84-ae24-0dd6062f8b48
+
+
+
 ### Bot editing
 
 https://github.com/ninest/civic-connect/assets/34677361/097c02ed-b200-4924-9d6c-1c9804dbfbc5
